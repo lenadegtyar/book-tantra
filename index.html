@@ -1,0 +1,1862 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Книжная тантра — клуб интеграции чтения</title>
+    <meta
+        name="description"
+        content="Книжная тантра — клуб интеграции чтения. Медленнее. Глубже. Вкуснее."
+    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;500;600;700&family=Fraunces:opsz,wght,SOFT@9..144,300..700,50&display=swap"
+        rel="stylesheet"
+    >
+    <style>
+        :root {
+            --ink: #18263b;
+            --ink-soft: #2f425d;
+            --cloud: #f8f3eb;
+            --paper: #fffdf7;
+            --paper-deep: #f1e5d8;
+            --accent: #c47d57;
+            --accent-soft: #f0c5ad;
+            --teal: #4d6c7a;
+            --teal-deep: #244559;
+            --gold: #c8a96a;
+            --border: rgba(24, 38, 59, 0.12);
+            --shadow: 0 30px 80px rgba(24, 38, 59, 0.14);
+            --radius-xl: 36px;
+            --radius-lg: 24px;
+            --radius-md: 18px;
+            --max-width: 1220px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Familjen Grotesk", sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at top left, rgba(196, 125, 87, 0.08), transparent 28%),
+                radial-gradient(circle at 85% 12%, rgba(77, 108, 122, 0.12), transparent 26%),
+                linear-gradient(180deg, #fcfaf6 0%, #f7efe5 100%);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: 0.14;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+            background-size: 32px 32px;
+            mask-image: radial-gradient(circle at center, black 55%, transparent 95%);
+            z-index: 999;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            width: min(var(--max-width), calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+        .page-shell {
+            position: relative;
+        }
+
+        .page-shell::before,
+        .page-shell::after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            border-radius: 999px;
+            filter: blur(10px);
+        }
+
+        .page-shell::before {
+            width: 420px;
+            height: 420px;
+            right: -160px;
+            top: 420px;
+            background: rgba(196, 125, 87, 0.14);
+        }
+
+        .page-shell::after {
+            width: 360px;
+            height: 360px;
+            left: -160px;
+            top: 1460px;
+            background: rgba(77, 108, 122, 0.12);
+        }
+
+        .topbar-wrap {
+            position: sticky;
+            top: 12px;
+            z-index: 40;
+            padding-top: 12px;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            padding: 12px 18px 12px 14px;
+            background: rgba(255, 250, 243, 0.84);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(18px);
+            border-radius: 999px;
+            box-shadow: 0 18px 45px rgba(24, 38, 59, 0.08);
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 0;
+        }
+
+        .brand img {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 10px 18px rgba(24, 38, 59, 0.16);
+        }
+
+        .brand-copy {
+            min-width: 0;
+        }
+
+        .brand-title {
+            font-size: 0.94rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .brand-subtitle {
+            color: rgba(24, 38, 59, 0.66);
+            font-size: 0.78rem;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+            justify-content: center;
+            font-size: 0.95rem;
+            color: rgba(24, 38, 59, 0.78);
+        }
+
+        .nav-links a {
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 100%;
+            height: 1px;
+            background: currentColor;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.25s ease;
+        }
+
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+        }
+
+        .nav-cta,
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 50px;
+            padding: 0 22px;
+            border-radius: 999px;
+            border: 1px solid transparent;
+            font-weight: 600;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+        }
+
+        .nav-cta:hover,
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 28px rgba(24, 38, 59, 0.14);
+        }
+
+        .button-primary,
+        .nav-cta {
+            background: var(--ink);
+            color: #fff8f0;
+        }
+
+        .button-secondary {
+            background: rgba(255, 252, 246, 0.7);
+            color: var(--ink);
+            border-color: rgba(24, 38, 59, 0.14);
+        }
+
+        .button-light {
+            background: rgba(255, 247, 238, 0.24);
+            color: #fff8f0;
+            border-color: rgba(255, 255, 255, 0.24);
+        }
+
+        .hero {
+            padding: 132px 0 88px;
+        }
+
+        .hero-panel {
+            position: relative;
+            overflow: hidden;
+            border-radius: 48px;
+            background:
+                radial-gradient(circle at 14% 18%, rgba(255, 216, 185, 0.14), transparent 20%),
+                radial-gradient(circle at 82% 26%, rgba(196, 125, 87, 0.24), transparent 24%),
+                linear-gradient(135deg, #17314a 0%, #30556a 48%, #16324e 100%);
+            padding: 48px;
+            min-height: 720px;
+            box-shadow: var(--shadow);
+        }
+
+        .hero-panel::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(90deg, rgba(12, 23, 36, 0.14) 0%, transparent 42%),
+                radial-gradient(circle at 62% 52%, rgba(255, 255, 255, 0.06), transparent 40%);
+        }
+
+        .hero-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: minmax(0, 1.08fr) minmax(320px, 0.92fr);
+            align-items: start;
+            gap: 40px;
+            min-height: 0;
+        }
+
+        .hero-copy {
+            max-width: 620px;
+            padding: 28px 28px 22px;
+            border-radius: 28px;
+            background: rgba(255, 248, 239, 0.94);
+            box-shadow: 0 28px 46px rgba(10, 20, 31, 0.16);
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 7px 14px;
+            border-radius: 999px;
+            margin-bottom: 20px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            background: rgba(196, 169, 106, 0.14);
+            color: var(--teal-deep);
+        }
+
+        .hero h1,
+        .section-title,
+        .pricing-title,
+        .footer-title {
+            font-family: "Fraunces", serif;
+            font-weight: 500;
+            letter-spacing: -0.03em;
+            line-height: 0.96;
+        }
+
+        .hero h1 {
+            font-size: clamp(3.1rem, 6vw, 6.2rem);
+            margin-bottom: 18px;
+            max-width: 10ch;
+        }
+
+        .hero-lead {
+            font-size: 1.13rem;
+            color: rgba(24, 38, 59, 0.78);
+            max-width: 50ch;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 28px;
+        }
+
+        .hero-microcopy {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 28px;
+        }
+
+        .micro-card {
+            padding: 16px;
+            border-radius: 18px;
+            background: rgba(24, 38, 59, 0.04);
+        }
+
+        .micro-label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(24, 38, 59, 0.52);
+        }
+
+        .micro-card strong {
+            display: block;
+            font-size: 1.05rem;
+            line-height: 1.35;
+        }
+
+        .hero-visual {
+            position: relative;
+            min-height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            justify-content: flex-start;
+            width: min(100%, 500px);
+            justify-self: end;
+        }
+
+        .hero-logo-card {
+            width: 100%;
+            padding: 22px;
+            border-radius: 34px;
+            background: rgba(255, 248, 239, 0.13);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 28px 54px rgba(6, 12, 20, 0.22);
+        }
+
+        .hero-logo-card img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 28px;
+            box-shadow: 0 30px 60px rgba(6, 12, 20, 0.26);
+        }
+
+        .hero-support {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-auto-rows: 1fr;
+            align-items: stretch;
+            gap: 14px;
+            width: 100%;
+            margin-top: 18px;
+        }
+
+        .hero-support-card {
+            min-height: 0;
+            height: 100%;
+            padding: 18px;
+            border-radius: 22px;
+            color: #fff7ef;
+            background: rgba(23, 44, 63, 0.74);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 16px 28px rgba(6, 12, 20, 0.14);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .hero-support-card strong {
+            display: block;
+            font-size: 0.82rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            color: rgba(255, 245, 232, 0.72);
+        }
+
+        .hero-support-card p {
+            font-size: 1rem;
+            line-height: 1.45;
+        }
+
+        section {
+            padding: 84px 0;
+        }
+
+        .section-head {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+        .section-kicker {
+            display: inline-block;
+            margin-bottom: 12px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.11em;
+            text-transform: uppercase;
+            color: rgba(24, 38, 59, 0.55);
+        }
+
+        .section-title {
+            font-size: clamp(2.35rem, 4vw, 4.3rem);
+            max-width: 10ch;
+        }
+
+        .section-intro {
+            max-width: 56ch;
+            color: rgba(24, 38, 59, 0.72);
+            font-size: 1.05rem;
+        }
+
+        .topics-strip {
+            display: grid;
+            grid-auto-flow: column;
+            grid-auto-columns: minmax(220px, 1fr);
+            gap: 18px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            scrollbar-width: thin;
+        }
+
+        .topic-card {
+            min-height: 220px;
+            padding: 22px;
+            border-radius: 26px;
+            background: rgba(255, 252, 247, 0.88);
+            border: 1px solid var(--border);
+            box-shadow: 0 14px 36px rgba(24, 38, 59, 0.06);
+        }
+
+        .topic-index {
+            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 48px;
+            font-weight: 700;
+            color: var(--accent);
+            background: rgba(196, 125, 87, 0.12);
+        }
+
+        .topic-card h3,
+        .step-card h3,
+        .resource-card h3,
+        .quote-card h3,
+        .author-card h3,
+        .price-card h3 {
+            font-family: "Fraunces", serif;
+            font-size: 1.55rem;
+            font-weight: 450;
+            line-height: 1.05;
+            margin-bottom: 10px;
+        }
+
+        .topic-card p,
+        .step-card p,
+        .resource-card p,
+        .quote-card p,
+        .author-card p,
+        .price-card p {
+            color: rgba(24, 38, 59, 0.74);
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+            gap: 28px;
+            align-items: stretch;
+        }
+
+        .story-visual {
+            position: relative;
+            min-height: 640px;
+            border-radius: 34px;
+            overflow: hidden;
+            background:
+                linear-gradient(180deg, rgba(36, 69, 89, 0.08), rgba(36, 69, 89, 0.18)),
+                var(--paper);
+            box-shadow: var(--shadow);
+        }
+
+        .story-visual-main {
+            position: absolute;
+            inset: 24px 80px 120px 24px;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 26px 60px rgba(24, 38, 59, 0.16);
+        }
+
+        .story-visual-main img,
+        .story-visual-small img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .story-visual-small {
+            position: absolute;
+            right: 24px;
+            bottom: 24px;
+            width: 42%;
+            aspect-ratio: 0.88 / 1;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 8px solid rgba(255, 252, 247, 0.92);
+            box-shadow: 0 20px 44px rgba(24, 38, 59, 0.16);
+        }
+
+        .story-tag {
+            position: absolute;
+            left: 24px;
+            top: 24px;
+            max-width: 220px;
+            padding: 14px 16px;
+            border-radius: 18px;
+            background: rgba(255, 248, 239, 0.9);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 18px 30px rgba(24, 38, 59, 0.12);
+        }
+
+        .story-tag strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: rgba(24, 38, 59, 0.48);
+        }
+
+        .story-copy {
+            display: grid;
+            gap: 16px;
+        }
+
+        .step-card,
+        .resource-card,
+        .quote-card,
+        .author-card,
+        .price-card,
+        .cta-band,
+        .footer-shell {
+            border-radius: 28px;
+            background: rgba(255, 252, 247, 0.86);
+            border: 1px solid var(--border);
+            box-shadow: 0 18px 40px rgba(24, 38, 59, 0.07);
+        }
+
+        .step-card {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 18px;
+            padding: 24px;
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            border-radius: 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(36, 69, 89, 0.1);
+            color: var(--teal-deep);
+            font-weight: 700;
+        }
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .resource-card {
+            overflow: hidden;
+        }
+
+        .resource-image {
+            aspect-ratio: 1.12 / 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resource-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .resource-body {
+            padding: 22px;
+        }
+
+        .resource-label {
+            display: inline-flex;
+            margin-bottom: 10px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: rgba(196, 125, 87, 0.12);
+            color: var(--accent);
+        }
+
+        .examples-wrap {
+            display: grid;
+            grid-template-columns: minmax(0, 0.94fr) minmax(0, 1.06fr);
+            gap: 18px;
+            align-items: start;
+        }
+
+        .examples-intro {
+            padding: 34px;
+            border-radius: 32px;
+            background: linear-gradient(180deg, rgba(255, 250, 244, 0.98) 0%, rgba(243, 233, 222, 0.96) 100%);
+            border: 1px solid rgba(24, 38, 59, 0.1);
+            box-shadow: 0 18px 44px rgba(24, 38, 59, 0.08);
+        }
+
+        .examples-grid {
+            display: grid;
+            gap: 18px;
+        }
+
+        .example-card {
+            display: grid;
+            grid-template-columns: 130px 1fr;
+            gap: 18px;
+            padding: 22px;
+            border-radius: 28px;
+            background: rgba(255, 252, 247, 0.88);
+            border: 1px solid var(--border);
+            box-shadow: 0 16px 36px rgba(24, 38, 59, 0.07);
+        }
+
+        .example-cover {
+            width: 100%;
+            aspect-ratio: 0.72 / 1;
+            border-radius: 18px;
+            overflow: hidden;
+        }
+
+        .example-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .example-points {
+            margin-top: 12px;
+            display: grid;
+            gap: 10px;
+            color: rgba(24, 38, 59, 0.78);
+        }
+
+        .example-points div {
+            padding-left: 18px;
+            position: relative;
+        }
+
+        .example-points div::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+
+        .quotes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .quote-card {
+            padding: 26px;
+            min-height: 240px;
+        }
+
+        .quote-card h3 {
+            margin-bottom: 18px;
+        }
+
+        .quote-card blockquote {
+            font-family: "Fraunces", serif;
+            font-size: 1.32rem;
+            line-height: 1.25;
+            margin-bottom: 18px;
+            color: var(--ink);
+        }
+
+        .quote-card footer {
+            font-size: 0.92rem;
+            color: rgba(24, 38, 59, 0.56);
+        }
+
+        .authors-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .author-card {
+            padding: 24px;
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 22px;
+            align-items: center;
+        }
+
+        .author-photo {
+            border-radius: 22px;
+            overflow: hidden;
+            aspect-ratio: 0.88 / 1;
+            box-shadow: 0 18px 36px rgba(24, 38, 59, 0.12);
+        }
+
+        .author-role {
+            display: inline-flex;
+            margin-bottom: 12px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: rgba(36, 69, 89, 0.08);
+            color: var(--teal-deep);
+        }
+
+        .author-quote {
+            margin-top: 14px;
+            color: rgba(24, 38, 59, 0.72);
+            font-style: italic;
+        }
+
+        .pricing-shell {
+            display: grid;
+            gap: 22px;
+        }
+
+        .pricing-head {
+            display: grid;
+            gap: 12px;
+            max-width: 760px;
+        }
+
+        .pricing-title {
+            font-size: clamp(2.6rem, 4.8vw, 4.6rem);
+        }
+
+        .prices {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .price-card {
+            padding: 26px;
+            display: grid;
+            gap: 14px;
+        }
+
+        .price-card.featured {
+            background:
+                linear-gradient(180deg, rgba(32, 52, 76, 0.97) 0%, rgba(25, 41, 62, 0.98) 100%);
+            color: #fff7ef;
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .price-card.featured p,
+        .price-card.featured .price-note,
+        .price-card.featured li {
+            color: rgba(255, 247, 239, 0.76);
+        }
+
+        .price-kicker {
+            display: inline-flex;
+            width: fit-content;
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: rgba(196, 125, 87, 0.12);
+            color: var(--accent);
+        }
+
+        .price-card.featured .price-kicker {
+            background: rgba(255, 247, 239, 0.1);
+            color: var(--accent-soft);
+        }
+
+        .price {
+            font-family: "Fraunces", serif;
+            font-size: 3rem;
+            line-height: 0.95;
+        }
+
+        .price span {
+            font-size: 1rem;
+            font-family: "Familjen Grotesk", sans-serif;
+            color: inherit;
+        }
+
+        .price-note {
+            font-size: 0.95rem;
+            color: rgba(24, 38, 59, 0.58);
+        }
+
+        .price-list {
+            list-style: none;
+            display: grid;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .price-list li {
+            position: relative;
+            padding-left: 18px;
+            color: rgba(24, 38, 59, 0.74);
+        }
+
+        .price-list li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: currentColor;
+            opacity: 0.45;
+        }
+
+        .cta-band {
+            padding: 32px;
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) auto;
+            gap: 20px;
+            align-items: center;
+            background:
+                radial-gradient(circle at 8% 20%, rgba(196, 125, 87, 0.12), transparent 22%),
+                linear-gradient(135deg, rgba(252, 241, 232, 0.98) 0%, rgba(241, 226, 214, 0.98) 100%);
+        }
+
+        .cta-band h3 {
+            font-family: "Fraunces", serif;
+            font-size: clamp(2rem, 3vw, 3.2rem);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            padding-bottom: 54px;
+        }
+
+        .footer-shell {
+            padding: 28px;
+            background:
+                linear-gradient(180deg, rgba(255, 252, 247, 0.95) 0%, rgba(247, 239, 230, 0.96) 100%);
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+            gap: 28px;
+            margin-bottom: 28px;
+        }
+
+        .footer-brand {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .footer-brand img {
+            width: 92px;
+            height: 92px;
+            border-radius: 24px;
+            object-fit: cover;
+            box-shadow: 0 20px 36px rgba(24, 38, 59, 0.12);
+        }
+
+        .footer-title {
+            font-size: clamp(2rem, 3vw, 3rem);
+            margin-bottom: 10px;
+        }
+
+        .footer-columns {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .footer-column h4 {
+            margin-bottom: 12px;
+            font-size: 0.84rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(24, 38, 59, 0.52);
+        }
+
+        .footer-column ul {
+            list-style: none;
+            display: grid;
+            gap: 10px;
+            color: rgba(24, 38, 59, 0.72);
+        }
+
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(24, 38, 59, 0.1);
+            color: rgba(24, 38, 59, 0.56);
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 1080px) {
+            .hero-grid,
+            .story-grid,
+            .examples-wrap,
+            .footer-top {
+                grid-template-columns: 1fr;
+            }
+
+            .resource-grid,
+            .quotes-grid,
+            .prices,
+            .authors-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-visual {
+                min-height: auto;
+            }
+
+            .hero-logo-card {
+                justify-self: center;
+            }
+
+            .hero-support {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 820px) {
+            .topbar {
+                flex-wrap: wrap;
+                border-radius: 28px;
+                gap: 14px;
+                padding: 12px;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: flex-start;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                white-space: nowrap;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+                padding-bottom: 4px;
+            }
+
+            .nav-links::-webkit-scrollbar {
+                display: none;
+            }
+
+            .hero-panel {
+                padding: 22px;
+                min-height: auto;
+                border-radius: 32px;
+            }
+
+            .hero-copy {
+                padding: 22px;
+            }
+
+            .hero {
+                padding: 96px 0 62px;
+            }
+
+            .hero-grid {
+                gap: 24px;
+            }
+
+            .hero-microcopy,
+            .cta-band,
+            .footer-columns {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-support {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-visual {
+                min-height: auto;
+            }
+
+            .example-card,
+            .author-card {
+                grid-template-columns: 1fr;
+            }
+
+            .resource-image,
+            .story-visual-main,
+            .story-visual-small {
+                border-radius: 22px;
+            }
+
+            .section-head {
+                align-items: start;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .story-visual {
+                min-height: 520px;
+            }
+
+            .story-visual-main {
+                inset: 18px 54px 96px 18px;
+            }
+
+            .story-visual-small {
+                width: 44%;
+                right: 18px;
+                bottom: 18px;
+                border-width: 6px;
+            }
+
+            .story-tag {
+                left: 18px;
+                top: 18px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .container {
+                width: min(var(--max-width), calc(100% - 20px));
+            }
+
+            section {
+                padding: 54px 0;
+            }
+
+            .topbar-wrap {
+                position: static;
+                top: auto;
+                padding-top: 10px;
+            }
+
+            .hero {
+                padding-top: 22px;
+            }
+
+            .hero h1 {
+                font-size: clamp(2.5rem, 15vw, 3.8rem);
+                line-height: 0.92;
+                max-width: 8ch;
+            }
+
+            .hero-microcopy {
+                gap: 10px;
+            }
+
+            .brand {
+                width: 100%;
+            }
+
+            .brand img {
+                width: 38px;
+                height: 38px;
+            }
+
+            .brand-title {
+                font-size: 0.88rem;
+            }
+
+            .brand-subtitle {
+                font-size: 0.74rem;
+            }
+
+            .nav-cta,
+            .button {
+                width: 100%;
+                min-height: 48px;
+            }
+
+            .nav-links {
+                gap: 14px;
+                font-size: 0.92rem;
+            }
+
+            .hero-panel {
+                padding: 18px;
+                border-radius: 26px;
+            }
+
+            .hero-copy {
+                padding: 18px;
+                border-radius: 22px;
+            }
+
+            .hero-lead {
+                font-size: 1rem;
+            }
+
+            .hero-actions {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .micro-card {
+                padding: 14px;
+            }
+
+            .micro-card strong {
+                font-size: 1rem;
+            }
+
+            .hero-logo-card {
+                width: 100%;
+                padding: 14px;
+                border-radius: 24px;
+            }
+
+            .hero-logo-card img {
+                border-radius: 18px;
+            }
+
+            .hero-support {
+                gap: 10px;
+                margin-top: 12px;
+            }
+
+            .hero-support-card {
+                padding: 14px;
+                border-radius: 18px;
+            }
+
+            .hero-support-card p {
+                font-size: 0.95rem;
+            }
+
+            .section-title,
+            .pricing-title,
+            .footer-title {
+                line-height: 1;
+            }
+
+            .section-title {
+                font-size: clamp(2rem, 11vw, 2.7rem);
+            }
+
+            .section-intro {
+                font-size: 0.98rem;
+            }
+
+            .topics-strip {
+                grid-auto-columns: minmax(240px, 82vw);
+                gap: 14px;
+                margin-right: -4px;
+                padding-bottom: 6px;
+            }
+
+            .topic-card {
+                min-height: 196px;
+                padding: 18px;
+                border-radius: 22px;
+            }
+
+            .topic-index {
+                margin-bottom: 28px;
+            }
+
+            .story-visual {
+                min-height: 430px;
+                border-radius: 24px;
+            }
+
+            .story-visual-main {
+                inset: 14px 36px 74px 14px;
+                border-radius: 20px;
+            }
+
+            .story-visual-small {
+                width: 42%;
+                right: 14px;
+                bottom: 14px;
+                border-radius: 18px;
+            }
+
+            .story-tag {
+                left: 14px;
+                top: 14px;
+                max-width: 180px;
+                padding: 12px 14px;
+                border-radius: 16px;
+                font-size: 0.88rem;
+            }
+
+            .step-card,
+            .resource-body,
+            .quote-card,
+            .price-card,
+            .author-card,
+            .examples-intro,
+            .footer-shell {
+                padding: 18px;
+            }
+
+            .resource-label,
+            .author-role,
+            .price-kicker {
+                font-size: 0.74rem;
+            }
+
+            .example-card {
+                gap: 14px;
+                padding: 18px;
+                border-radius: 22px;
+            }
+
+            .example-cover {
+                aspect-ratio: 1.45 / 1;
+            }
+
+            .quote-card {
+                min-height: 0;
+            }
+
+            .quote-card blockquote {
+                font-size: 1.14rem;
+            }
+
+            .author-photo {
+                aspect-ratio: 1.08 / 1;
+                border-radius: 18px;
+            }
+
+            .price {
+                font-size: 2.35rem;
+            }
+
+            .cta-band {
+                padding: 20px;
+                gap: 14px;
+            }
+
+            .cta-band h3 {
+                font-size: clamp(1.8rem, 10vw, 2.4rem);
+            }
+
+            .footer-brand {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 14px;
+            }
+
+            .footer-brand img {
+                width: 74px;
+                height: 74px;
+                border-radius: 20px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+                font-size: 0.9rem;
+            }
+
+            .micro-card,
+            .step-card,
+            .quote-card,
+            .price-card,
+            .cta-band,
+            .footer-shell {
+                border-radius: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-shell">
+        <div class="topbar-wrap">
+            <div class="container">
+                <header class="topbar">
+                    <a class="brand" href="#top">
+                        <img src="photo_2026-02-09_14-55-57.jpg" alt="Логотип Книжной тантры">
+                        <div class="brand-copy">
+                            <div class="brand-title">Книжная тантра</div>
+                            <div class="brand-subtitle">Клуб интеграции чтения</div>
+                        </div>
+                    </a>
+
+                    <nav class="nav-links" aria-label="Навигация по странице">
+                        <a href="#topics">Темы</a>
+                        <a href="#format">Формат</a>
+                        <a href="#examples">Примеры</a>
+                        <a href="#voices">Голоса клуба</a>
+                        <a href="#authors">Авторы</a>
+                        <a href="#pricing">Тарифы</a>
+                    </nav>
+
+                    <a class="nav-cta" href="https://t.me/booktantra_bot" target="_blank" rel="noopener">
+                        Вступить
+                    </a>
+                </header>
+            </div>
+        </div>
+
+        <main id="top">
+            <section class="hero">
+                <div class="container">
+                    <div class="hero-panel">
+                        <div class="hero-grid">
+                            <div class="hero-copy">
+                                <div class="eyebrow">Клуб интеграции чтения</div>
+                                <h1>Не читать больше. Читать так, чтобы это осталось в тебе.</h1>
+                                <p class="hero-lead">
+                                    Книжная тантра — это клуб для тех, кому мало просто закрыть книгу. Здесь
+                                    чтение проходит через тебя: через вопрос, через AI-диалог, через короткий
+                                    шеринг и через то, как мыслят другие.
+                                </p>
+                                <div class="hero-actions">
+                                    <a class="button button-primary" href="https://t.me/booktantra_bot" target="_blank" rel="noopener">
+                                        Присоединиться через Telegram
+                                    </a>
+                                    <a class="button button-secondary" href="#format">
+                                        Посмотреть, как это устроено
+                                    </a>
+                                </div>
+
+                                <div class="hero-microcopy">
+                                    <div class="micro-card">
+                                        <span class="micro-label">Ритм</span>
+                                        <strong>Понедельничный check-in, отчёт раз в 2 недели, созвон раз в месяц</strong>
+                                    </div>
+                                    <div class="micro-card">
+                                        <span class="micro-label">Принцип</span>
+                                        <strong>Каждый читает своё: фикшн, нон-фикшн, бумагу, аудио</strong>
+                                    </div>
+                                    <div class="micro-card">
+                                        <span class="micro-label">AI-слой</span>
+                                        <strong>Промпты и вопросы, которые помогают не пересказывать, а понимать</strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="hero-visual" aria-hidden="true">
+                                <div class="hero-logo-card">
+                                    <img src="photo_2026-02-09_14-55-57.jpg" alt="Существующий логотип Книжной тантры">
+                                </div>
+                                <div class="hero-support">
+                                    <div class="hero-support-card">
+                                        <strong>Ключевая мысль</strong>
+                                        <p>Не проглатывать книги, а смаковать их, переваривать и встраивать в жизнь.</p>
+                                    </div>
+                                    <div class="hero-support-card">
+                                        <strong>Почему работает</strong>
+                                        <p>Минимальная структура держит ритм и помогает чтению не растворяться.</p>
+                                    </div>
+                                    <div class="hero-support-card">
+                                        <strong>Без гонки</strong>
+                                        <p>Здесь не нужно читать быстрее, больше или правильнее. Важнее заметить, что книга сделала с тобой.</p>
+                                    </div>
+                                    <div class="hero-support-card">
+                                        <strong>Для кого</strong>
+                                        <p>Для тех, кто хочет читать медленнее, яснее и не терять смысл через неделю после книги.</p>
+                                    </div>
+                                    <div class="hero-support-card">
+                                        <strong>Что внутри</strong>
+                                        <p>Telegram-канал, чат, промпты месяца и живые шеринги участников клуба.</p>
+                                    </div>
+                                    <div class="hero-support-card">
+                                        <strong>Что меняется</strong>
+                                        <p>Книги перестают быть фоном и становятся способом думать, чувствовать и замечать больше.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="topics">
+                <div class="container">
+                    <div class="section-head">
+                        <div>
+                            <span class="section-kicker">Темы клуба</span>
+                            <h2 class="section-title">Не список книг, а поле тем и способов читать.</h2>
+                        </div>
+                        <p class="section-intro">
+                            Клуб помогает читать глубже: замечать смысл, спорить с автором, проживать фикшн,
+                            использовать AI как собеседника и слышать, как мыслят другие.
+                        </p>
+                    </div>
+
+                    <div class="topics-strip">
+                        <article class="topic-card">
+                            <span class="topic-index">01</span>
+                            <h3>Интеграция</h3>
+                            <p>Не “о чём книга”, а “что она делает со мной, где цепляет и где зовёт копать дальше”.</p>
+                        </article>
+                        <article class="topic-card">
+                            <span class="topic-index">02</span>
+                            <h3>Фикшн как зеркало</h3>
+                            <p>Сцены, персонажи, желания и трения, через которые книга вдруг начинает говорить о тебе.</p>
+                        </article>
+                        <article class="topic-card">
+                            <span class="topic-index">03</span>
+                            <h3>Нон-фикшн без послушания</h3>
+                            <p>Спор с автором, проверка логики, альтернативные гипотезы и микро-эксперименты.</p>
+                        </article>
+                        <article class="topic-card">
+                            <span class="topic-index">04</span>
+                            <h3>AI как усилитель</h3>
+                            <p>Готовые промпты помогают не “спросить summary”, а вытащить собственное мышление.</p>
+                        </article>
+                        <article class="topic-card">
+                            <span class="topic-index">05</span>
+                            <h3>Разные книги</h3>
+                            <p>Каждый читает своё. В клубе важен не единый список, а разнообразие оптик и вкусов.</p>
+                        </article>
+                        <article class="topic-card">
+                            <span class="topic-index">06</span>
+                            <h3>Созвон-презентации</h3>
+                            <p>Раз в месяц желающие приносят книгу, идею, сцену или вопрос, который не отпускает.</p>
+                        </article>
+                        <article class="topic-card">
+                            <span class="topic-index">07</span>
+                            <h3>Промпт месяца</h3>
+                            <p>Один хороший вопрос, который каждый примеряет к своей книге и получает новый слой смысла.</p>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section id="format">
+                <div class="container">
+                    <div class="story-grid">
+                        <div class="story-visual">
+                            <div class="story-tag">
+                                <strong>Чтение, которое остаётся</strong>
+                                Не на скорость и не на галочку, а на вкус, смысл и внутренний сдвиг.
+                            </div>
+                            <div class="story-visual-main">
+                                <img src="Photos/notebook-books.jpg" alt="Блокнот, книга и чашка кофе">
+                            </div>
+                            <div class="story-visual-small">
+                                <img src="photo_2026-02-09_14-55-57.jpg" alt="Логотип клуба">
+                            </div>
+                        </div>
+
+                        <div class="story-copy">
+                            <div>
+                                <span class="section-kicker">Как это работает</span>
+                                <h2 class="section-title">Клуб живет в вашем темпе без перегруза.</h2>
+                            </div>
+
+                            <article class="step-card">
+                                <div class="step-number">1</div>
+                                <div>
+                                    <h3>Check-in по понедельникам</h3>
+                                    <p>Короткая карточка: что читаю, где я в книге, о чём это для меня прямо сейчас. Две минуты, которые не дают чтению раствориться.</p>
+                                </div>
+                            </article>
+
+                            <article class="step-card">
+                                <div class="step-number">2</div>
+                                <div>
+                                    <h3>Отчёт раз в две недели</h3>
+                                    <p>Не рецензия и не школьный пересказ. Один выбранный формат: паспорт смысла, спор с автором, зеркало фикшена или микро-эксперимент.</p>
+                                </div>
+                            </article>
+
+                            <article class="step-card">
+                                <div class="step-number">3</div>
+                                <div>
+                                    <h3>Созвон-презентации раз в месяц</h3>
+                                    <p>Кто хочет, приносит свою книгу и рассказывает: что тронуло, как разгонял с AI, что остаётся открытым вопросом.</p>
+                                </div>
+                            </article>
+
+                            <article class="step-card">
+                                <div class="step-number">4</div>
+                                <div>
+                                    <h3>Prompt-of-the-Month</h3>
+                                    <p>Раз в месяц клуб получает готовые вопросы для фикшена и нон-фикшена, чтобы углублять чтение без лишней методички.</p>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="container">
+                    <div class="section-head">
+                        <div>
+                            <span class="section-kicker">Что внутри</span>
+                            <h2 class="section-title">Что получает участник, кроме красивых слов.</h2>
+                        </div>
+                        <p class="section-intro">
+                            Здесь есть и ритм участия, и готовые инструменты для чтения, и сообщество,
+                            в котором книга не исчезает сразу после последней страницы.
+                        </p>
+                    </div>
+
+                    <div class="resource-grid">
+                        <article class="resource-card">
+                            <div class="resource-image">
+                                <img src="https://images.pexels.com/photos/30514322/pexels-photo-30514322.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Мягкий утренний свет сквозь светлые шторы">
+                            </div>
+                            <div class="resource-body">
+                                <span class="resource-label">Reading Lab</span>
+                                <h3>Структура, которая дисциплинирует мягко</h3>
+                                <p>Закрытый Telegram-канал и чат клуба, check-in, отчёты и простые рамки, которые не душат, а поддерживают регулярность.</p>
+                            </div>
+                        </article>
+
+                        <article class="resource-card">
+                            <div class="resource-image">
+                                <img src="https://images.pexels.com/photos/32796679/pexels-photo-32796679.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Тёплый солнечный свет в спокойном интерьере">
+                            </div>
+                            <div class="resource-body">
+                                <span class="resource-label">AI Companion</span>
+                                <h3>Промпты, которые помогают думать</h3>
+                                <p>Не “перескажи книгу”, а “помоги понять, что эта сцена во мне трогает” и “где автор делает прыжок логики”.</p>
+                            </div>
+                        </article>
+
+                        <article class="resource-card">
+                            <div class="resource-image">
+                                <img src="https://images.pexels.com/photos/27486785/pexels-photo-27486785.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="Две чашки чая на деревянном столе с мягко размытыми цветами на фоне">
+                            </div>
+                            <div class="resource-body">
+                                <span class="resource-label">Club Field</span>
+                                <h3>Сообщество людей, которым важна глубина</h3>
+                                <p>Каждый читает разное, но слышит, как другие мыслят. Это даёт рекомендации, язык, новые связи и ощущение живого поля.</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section id="examples">
+                <div class="container">
+                    <div class="examples-wrap">
+                        <div class="examples-intro">
+                            <span class="section-kicker">Примеры интеграции</span>
+                            <h2 class="section-title">Как выглядит интеграция книги вживую.</h2>
+                            <p class="section-intro">
+                                Так может выглядеть шеринг в клубе: не рецензия ради рецензии, а след того,
+                                что книга действительно сдвинула внутри.
+                            </p>
+                            <div class="example-points">
+                                <div>Каждый шеринг держится на личном отклике, а не на объективной рецензии.</div>
+                                <div>AI нужен не для подмены голоса участника, а чтобы сделать его точнее.</div>
+                                <div>Фикшн и нон-фикшн живут рядом: один помогает проживать, другой спорить и проверять.</div>
+                            </div>
+                        </div>
+
+                        <div class="examples-grid">
+                            <article class="example-card">
+                                <div class="example-cover">
+                                    <img src="Photos/думай медленно решай быстро.jpg" alt="Обложка Думай медленно... решай быстро">
+                                </div>
+                                <div>
+                                    <span class="resource-label">Нон-фикшн</span>
+                                    <h3>«Думай медленно... решай быстро»</h3>
+                                    <p>Книга становится полезной не в момент прочтения, а когда участник замечает: я слишком часто думаю на автопилоте и хочу это проверить на неделе.</p>
+                                    <div class="example-points">
+                                        <div>Инсайт: уверенность не равна правоте.</div>
+                                        <div>Применение: пауза перед важным решением и письменные аргументы “за” и “против”.</div>
+                                        <div>AI-вопрос: как эффект якорения работает в переговорах и как его заметить.</div>
+                                    </div>
+                                </div>
+                            </article>
+
+                            <article class="example-card">
+                                <div class="example-cover">
+                                    <img src="Photos/вторая жизнь Уве.jpg" alt="Обложка Вторая жизнь Уве">
+                                </div>
+                                <div>
+                                    <span class="resource-label">Фикшн</span>
+                                    <h3>«Вторая жизнь Уве»</h3>
+                                    <p>Художественная книга здесь не разбирается как “сюжет” — она становится зеркалом отношений, утраты, близости и того, что участник замечает о себе.</p>
+                                    <div class="example-points">
+                                        <div>Инсайт: любовь может выглядеть как ворчание и строгие правила.</div>
+                                        <div>Личный ход: написать человеку, которого я, возможно, недооцениваю.</div>
+                                        <div>AI-вопрос: через какие отношения герой реально трансформируется.</div>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="voices">
+                <div class="container">
+                    <div class="section-head">
+                        <div>
+                            <span class="section-kicker">Голоса клуба</span>
+                            <h2 class="section-title">Голоса, из которых видно: это уже живой формат.</h2>
+                        </div>
+                        <p class="section-intro">
+                            Сюда приходят не за гонкой по спискам, а за возможностью дольше оставаться с тем,
+                            что действительно задело и требует осмысления.
+                        </p>
+                    </div>
+
+                    <div class="quotes-grid">
+                        <article class="quote-card">
+                            <h3>Про фокус на процессе</h3>
+                            <blockquote>«Не результат — галочка стоит, а что я ощущала, какие смыслы и эмоции поднимались»</blockquote>
+                            <footer>Из группового созвона клуба</footer>
+                        </article>
+
+                        <article class="quote-card">
+                            <h3>Про пространство, которое держит</h3>
+                            <blockquote>«Я счастлива, что у нас есть это пространство, которое не даёт мне забить и скипнуть эту часть»</blockquote>
+                            <footer>Из чата участников</footer>
+                        </article>
+
+                        <article class="quote-card">
+                            <h3>Про контекст и глубину</h3>
+                            <blockquote>«Когда ты запрашиваешь контекст и задаёшь вопросы, книга вдруг начинает работать совсем иначе»</blockquote>
+                            <footer>Из обсуждения формата клуба</footer>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section id="authors">
+                <div class="container">
+                    <div class="section-head">
+                        <div>
+                            <span class="section-kicker">Авторы клуба</span>
+                            <h2 class="section-title">Клуб делают люди, которые сами хотят читать глубже.</h2>
+                        </div>
+                        <p class="section-intro">
+                            Лена и Юлия делают клуб из собственного читательского запроса:
+                            не читать больше, а читать внимательнее, глубже и честнее.
+                        </p>
+                    </div>
+
+                    <div class="authors-grid">
+                        <article class="author-card">
+                            <div class="author-photo">
+                                <img src="Photos/ЛД2.jpg" alt="Лена Дегтярь">
+                            </div>
+                            <div>
+                                <span class="author-role">Лена Дегтярь</span>
+                                <h3>Структура, мышление, продукт</h3>
+                                <p>PhD, coach, игропрактик, автор курсов «Принятие себя» и «Анатомия эмоций».</p>
+                                <p class="author-quote">«Я перескакиваю на следующую книгу, не интегрировав предыдущую. Клуб я создаю именно для этого».</p>
+                            </div>
+                        </article>
+
+                        <article class="author-card">
+                            <div class="author-photo">
+                                <img src="Photos/ЮВ.jpg" alt="Юлия Воронина">
+                            </div>
+                            <div>
+                                <span class="author-role">Юлия Воронина</span>
+                                <h3>Бренд, подача, телесная глубина</h3>
+                                <p>Executive Coach, практик телесной осознанности и дыхания, ex-TOP in Tech.</p>
+                                <p class="author-quote">«Я вижу этот клуб как пространство, где смысл не исчезает: ты фиксируешь отклик и докручиваешь глубину через AI».</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <section id="pricing">
+                <div class="container">
+                    <div class="pricing-shell">
+                        <div class="pricing-head">
+                            <span class="section-kicker">Тарифы</span>
+                            <h2 class="pricing-title">Вход в клуб простой, чтобы энергия уходила в чтение, а не в выбор тарифа.</h2>
+                            <p class="section-intro">
+                                Можно зайти на месяц, чтобы почувствовать формат, или остаться дольше,
+                                если хочется закрепить новый ритм чтения.
+                            </p>
+                        </div>
+
+                        <div class="prices">
+                            <article class="price-card">
+                                <span class="price-kicker">Месяц</span>
+                                <h3>Мягкий вход</h3>
+                                <div class="price">€9.99 <span>/ месяц</span></div>
+                                <p class="price-note">Подходит, если хочешь сначала почувствовать ритм клуба на себе.</p>
+                                <ul class="price-list">
+                                    <li>Доступ в Telegram-канал и чат</li>
+                                    <li>Check-in и отчёты по ритму клуба</li>
+                                    <li>Промпт месяца и созвон-презентации</li>
+                                </ul>
+                            </article>
+
+                            <article class="price-card featured">
+                                <span class="price-kicker">6 месяцев</span>
+                                <h3>Рекомендуемый ритм</h3>
+                                <div class="price">€49.99 <span>/ 6 месяцев</span></div>
+                                <p class="price-note">Экономия €10 и достаточно времени, чтобы увидеть, как меняется качество чтения.</p>
+                                <ul class="price-list">
+                                    <li>Все материалы клуба и живой ритм участия</li>
+                                    <li>Достаточный горизонт для нескольких циклов интеграции</li>
+                                    <li>Легче закрепить привычку не бросать книгу в полпути</li>
+                                </ul>
+                            </article>
+
+                            <article class="price-card">
+                                <span class="price-kicker">12 месяцев</span>
+                                <h3>Глубокая дистанция</h3>
+                                <div class="price">€89.99 <span>/ год</span></div>
+                                <p class="price-note">Экономия €30 для тех, кто хочет не разовый всплеск, а устойчивую практику чтения.</p>
+                                <ul class="price-list">
+                                    <li>Полный год в поле клуба</li>
+                                    <li>Регулярные созвоны, prompts и шеринги</li>
+                                    <li>Возможность видеть собственную читательскую траекторию</li>
+                                </ul>
+                            </article>
+                        </div>
+
+                        <div class="cta-band">
+                            <div>
+                                <h3>Книжная тантра — это когда ты не проглатываешь, а смакуешь.</h3>
+                                <p class="section-intro">
+                                    Если хочешь, чтобы чтение стало не фоном, а способом думать шире, чувствовать
+                                    точнее и жить глубже, кнопка ниже уже ведёт в действующий бот клуба.
+                                </p>
+                            </div>
+                            <a class="button button-primary" href="https://t.me/booktantra_bot" target="_blank" rel="noopener">
+                                Перейти в бот
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-shell">
+                    <div class="footer-top">
+                        <div>
+                            <div class="footer-brand">
+                                <img src="photo_2026-02-09_14-55-57.jpg" alt="Логотип Книжной тантры">
+                                <div>
+                                    <h2 class="footer-title">Книжная тантра</h2>
+                                    <p class="section-intro">
+                                        Клуб интеграции чтения для тех, кому важно не количество книг, а качество
+                                        внутреннего разговора, который они запускают.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="footer-columns">
+                            <div class="footer-column">
+                                <h4>Формат</h4>
+                                <ul>
+                                    <li>Check-in по понедельникам</li>
+                                    <li>Отчёт раз в 2 недели</li>
+                                    <li>Созвон раз в месяц</li>
+                                    <li>Prompt-of-the-Month</li>
+                                </ul>
+                            </div>
+                            <div class="footer-column">
+                                <h4>Контакты</h4>
+                                <ul>
+                                    <li><a href="https://t.me/booktantra_bot" target="_blank" rel="noopener">Telegram bot</a></li>
+                                    <li><a href="https://t.me/lenadegtyarcourses" target="_blank" rel="noopener">Задать вопрос</a></li>
+                                    <li>Inscape Projects</li>
+                                </ul>
+                            </div>
+                            <div class="footer-column">
+                                <h4>Для кого</h4>
+                                <ul>
+                                    <li>Для тех, у кого книги не успевают осесть</li>
+                                    <li>Для тех, кому важны глубина и контекст</li>
+                                    <li>Для тех, кто хочет использовать AI с умом</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="footer-bottom">
+                        <span>Книжная тантра • Inscape Projects</span>
+                        <span>Telegram-клуб для глубокого чтения</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
