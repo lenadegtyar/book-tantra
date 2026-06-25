@@ -276,7 +276,8 @@
         .hero-content {
             position: relative;
             z-index: 2;
-            max-width: 680px;
+            width: 100%;
+            max-width: 1120px;
         }
 
         .hero-logo {
@@ -311,6 +312,24 @@
             letter-spacing: -0.02em;
         }
 
+        .hero-book-hero h1 {
+            font-size: clamp(3.2rem, 6.4vw, 5.4rem);
+            margin-bottom: 28px;
+        }
+
+        .hero-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(360px, 0.78fr);
+            gap: 64px;
+            align-items: center;
+            text-align: left;
+        }
+
+        .hero-copy {
+            max-width: 620px;
+            min-width: 0;
+        }
+
         .hero-subtitle {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.5em;
@@ -320,6 +339,142 @@
             margin-bottom: 44px;
             letter-spacing: 0.03em;
             opacity: 0.9;
+        }
+
+        .hero-book-hero .hero-subtitle {
+            max-width: 600px;
+            margin: 0 0 34px;
+            font-family: 'Lora', Georgia, serif;
+            font-size: clamp(1.08rem, 1.8vw, 1.32rem);
+            font-style: normal;
+            line-height: 1.78;
+            color: var(--text-soft);
+        }
+
+        .hero-spotlight {
+            width: 100%;
+            min-width: 0;
+            padding: 44px 42px 52px;
+            display: grid;
+            grid-template-columns: 150px minmax(0, 1fr);
+            gap: 34px;
+            align-items: start;
+            text-align: left;
+            position: relative;
+            background:
+                linear-gradient(90deg, rgba(42, 107, 124, 0.58), rgba(196, 162, 101, 0.58)) top / 100% 3px no-repeat,
+                rgba(250, 247, 240, 0.76);
+            border: 1px solid rgba(196, 162, 101, 0.18);
+            box-shadow: 0 26px 80px rgba(30, 58, 95, 0.11);
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-spotlight::after {
+            content: '';
+            position: absolute;
+            left: 42px;
+            right: 42px;
+            bottom: 34px;
+            height: 1px;
+            background: linear-gradient(to right, rgba(196, 162, 101, 0.24), rgba(42, 107, 124, 0.14), transparent);
+        }
+
+        .hero-book-cover {
+            width: 148px;
+            aspect-ratio: 2 / 3;
+            object-fit: cover;
+            border-radius: 4px 9px 9px 4px;
+            box-shadow:
+                -7px 8px 0 rgba(196, 162, 101, 0.2),
+                0 22px 42px rgba(30, 58, 95, 0.22);
+            transform: rotate(-1.4deg);
+        }
+
+        .hero-theme-label {
+            display: block;
+            margin-bottom: 14px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.82em;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+        }
+
+        .hero-theme-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.85rem, 3.2vw, 2.65rem);
+            font-weight: 700;
+            line-height: 1.22;
+            color: var(--navy);
+            margin-bottom: 18px;
+        }
+
+        .hero-theme-note {
+            max-width: 570px;
+            color: var(--text-soft);
+            line-height: 1.7;
+        }
+
+        .hero-format-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 0 0 34px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .hero-format-strip li {
+            padding: 7px 13px;
+            border: 1px solid rgba(196, 162, 101, 0.22);
+            background: rgba(250, 247, 240, 0.52);
+            color: var(--gold-dark);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.88em;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 0;
+        }
+
+        .hero-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 42px;
+            padding: 10px 20px;
+            border: 1px solid rgba(42, 107, 124, 0.22);
+            color: var(--teal-deep);
+            text-decoration: none;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95em;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+        }
+
+        .hero-link.primary {
+            background: var(--teal-deep);
+            border-color: var(--teal-deep);
+            color: var(--parchment);
+        }
+
+        .hero-link:hover {
+            transform: translateY(-2px);
+            background: rgba(42, 107, 124, 0.08);
+        }
+
+        .hero-link.primary:hover {
+            background: var(--navy);
+            color: var(--parchment);
         }
 
         .hero-quote {
@@ -777,96 +932,6 @@
             margin-top: 10px;
             color: var(--teal-deep);
             font-size: 0.92em;
-        }
-
-        /* ============================
-           RHYTHM / HOW IT WORKS
-           ============================ */
-        .rhythm-section {
-            background:
-                radial-gradient(ellipse at 20% 80%, rgba(74, 107, 90, 0.06) 0%, transparent 40%),
-                radial-gradient(ellipse at 80% 20%, rgba(184, 212, 219, 0.15) 0%, transparent 40%),
-                var(--parchment-cool);
-        }
-
-        .rhythm-section .section-header {
-            text-align: center;
-            margin-bottom: 72px;
-        }
-
-        .rhythm-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
-        }
-
-        .rhythm-card {
-            text-align: center;
-            padding: 40px 28px;
-            position: relative;
-            background: rgba(250, 247, 240, 0.7);
-            border: 1px solid rgba(196, 162, 101, 0.1);
-            backdrop-filter: blur(4px);
-            transition: all 0.5s ease;
-            box-shadow: 0 2px 12px rgba(30, 58, 95, 0.03);
-        }
-
-        .rhythm-card:hover {
-            border-color: rgba(196, 162, 101, 0.3);
-            transform: translateY(-4px);
-            box-shadow: 0 12px 36px rgba(42, 107, 124, 0.06), 0 0 0 1px rgba(196, 162, 101, 0.15);
-        }
-
-        .rhythm-card::before {
-            content: '';
-            position: absolute;
-            top: -1px;
-            left: 20%;
-            right: 20%;
-            height: 2px;
-            background: linear-gradient(to right, transparent, var(--gold), transparent);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .rhythm-card:hover::before { opacity: 1; }
-
-        .rhythm-icon {
-            width: 56px;
-            height: 56px;
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .rhythm-icon svg {
-            width: 36px;
-            height: 36px;
-            stroke: var(--teal-deep);
-            stroke-width: 1.5;
-            fill: none;
-        }
-
-        .rhythm-frequency {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 0.85em;
-            color: var(--gold-dark);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 12px;
-            display: block;
-        }
-
-        .rhythm-card h3 {
-            color: var(--navy);
-            margin-bottom: 14px;
-        }
-
-        .rhythm-card p {
-            color: var(--text-soft);
-            font-size: 0.92em;
-            line-height: 1.7;
         }
 
         /* ============================
@@ -1679,9 +1744,6 @@
         .reveal-delay-3 { transition-delay: 0.3s; }
         .reveal-delay-4 { transition-delay: 0.4s; }
 
-        /* Staggered card animations */
-        .rhythm-card.reveal { transition-delay: calc(var(--i, 0) * 0.12s); }
-
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
 
@@ -1715,10 +1777,6 @@
                 order: -1;
             }
 
-            .rhythm-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
             .audience-grid {
                 grid-template-columns: 1fr;
             }
@@ -1727,6 +1785,41 @@
                 grid-template-columns: 1fr;
                 max-width: 620px;
             }
+
+            .hero-book-hero .hero-subtitle {
+                margin-bottom: 28px;
+            }
+
+            .hero-layout {
+                grid-template-columns: 1fr;
+                gap: 44px;
+                text-align: center;
+            }
+
+            .hero-copy {
+                max-width: 680px;
+                margin: 0 auto;
+            }
+
+            .hero-format-strip,
+            .hero-actions {
+                justify-content: center;
+            }
+
+            .hero-spotlight {
+                width: 100%;
+                max-width: 620px;
+                grid-template-columns: 118px minmax(0, 1fr);
+                gap: 30px;
+                padding: 42px 40px 54px;
+            }
+
+            .hero-spotlight::after {
+                left: 40px;
+                right: 40px;
+            }
+
+            .hero-book-cover { width: 118px; }
 
             .pricing-grid {
                 grid-template-columns: 1fr;
@@ -1745,9 +1838,35 @@
 
             .hero h1 { font-size: 2.6rem; }
 
-            h2 { font-size: 1.8rem; }
+            .hero-book-hero h1 { font-size: 3.15rem; }
 
-            .rhythm-grid { grid-template-columns: 1fr; }
+            .hero-book-hero .hero-subtitle {
+                font-size: 1.05rem;
+                line-height: 1.65;
+                margin-bottom: 26px;
+            }
+
+            .hero-spotlight {
+                max-width: 100%;
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 34px 22px 48px;
+            }
+
+            .hero-book-cover {
+                width: 120px;
+                margin: 0 auto;
+            }
+
+            .hero-theme-note {
+                margin: 0 auto;
+            }
+
+            .hero-actions {
+                justify-content: center;
+            }
+
+            h2 { font-size: 1.8rem; }
 
             .reading-list-section .section-header { margin-bottom: 42px; }
 
@@ -1776,14 +1895,13 @@
     <!-- Navigation dots -->
     <nav class="nav-dots">
         <button class="nav-dot active" data-section="hero" aria-label="Начало"></button>
-        <button class="nav-dot" data-section="benefits" aria-label="Что это"></button>
+        <button class="nav-dot" data-section="benefits" aria-label="Что происходит в клубе"></button>
         <button class="nav-dot" data-section="audience" aria-label="Для кого"></button>
+        <button class="nav-dot" data-section="authors" aria-label="Ведущие"></button>
         <button class="nav-dot" data-section="ai" aria-label="Двойная оптика"></button>
         <button class="nav-dot" data-section="steps" aria-label="Как это работает"></button>
-        <button class="nav-dot" data-section="example" aria-label="Книга июня"></button>
+        <button class="nav-dot" data-section="example" aria-label="Книга июля"></button>
         <button class="nav-dot" data-section="books" aria-label="Расписание на ближайшие шесть месяцев"></button>
-        <button class="nav-dot" data-section="rhythm" aria-label="Ритм клуба"></button>
-        <button class="nav-dot" data-section="authors" aria-label="Авторы"></button>
         <button class="nav-dot" data-section="pricing" aria-label="Стоимость"></button>
     </nav>
 
@@ -1799,32 +1917,48 @@
             <polygon points="200,350 50,120 350,120" stroke="currentColor" stroke-width="0.5" opacity="0.15"/>
         </svg>
 
-        <div class="hero-content">
-            <img src="photo_2026-02-09_14-55-57.jpg" alt="Трансформационное чтение" class="hero-logo">
-            <span class="hero-badge">Стартуем 1 июня</span>
-            <p class="hero-authors-line">Лена Дегтярь &amp; Юлия Воронина</p>
-            <h1>Трансформационное<br>чтение</h1>
-            <p class="hero-subtitle">Июнь: Эрих Фромм «Искусство любить».</p>
-            <blockquote class="hero-quote">
-                Закрытая группа, где каждый месяц читают одну книгу и работают с ней под коучинговой рамкой двух ведущих.
-            </blockquote>
-            <p class="hero-mantra">Книга становится материалом, через который видны убеждения, реакции и возможные сдвиги в жизни.</p>
+        <div class="hero-content hero-book-hero">
+            <div class="hero-layout">
+                <div class="hero-copy">
+                    <span class="hero-badge">Книжный клуб · старт 1 июля</span>
+                    <p class="hero-authors-line">Лена Дегтярь &amp; Юлия Воронина</p>
+                    <h1>Трансформационное<br>чтение</h1>
+                    <p class="hero-subtitle">Книжный клуб, где каждый месяц одна общая книга становится материалом для разговора, личных вопросов и коучингового упражнения.</p>
+                    <ul class="hero-format-strip" aria-label="Формат клуба">
+                        <li>Одна книга в месяц</li>
+                        <li>Вопросы в чате</li>
+                        <li>Закрытый звонок</li>
+                    </ul>
+                    <div class="hero-actions">
+                        <a href="https://t.me/booktantra_bot" class="hero-link primary" target="_blank" rel="noopener">Присоединиться</a>
+                        <a href="#books" class="hero-link">Расписание</a>
+                    </div>
+                </div>
+                <aside class="hero-spotlight" aria-label="Сейчас читаем">
+                    <img src="assets/book-covers/lisa-marchiano-spark-of-life.jpg" alt="Обложка книги Лизы Марчиано «Искра жизни»" class="hero-book-cover">
+                    <div>
+                        <span class="hero-theme-label">Сейчас читаем в июле</span>
+                        <div class="hero-theme-title">Лиза Марчиано<br>«Искра жизни»</div>
+                        <p class="hero-theme-note">Тема месяца: жизненность и женская сила. Будем читать о внутренней энергии, женских архетипах и тех местах, где жизненность возвращается через контакт с собой.</p>
+                    </div>
+                </aside>
+            </div>
             <p class="hero-brand">Inscape Projects</p>
         </div>
     </section>
 
-    <!-- ====== ЧТО ЭТО ====== -->
+    <!-- ====== ЧТО ПРОИСХОДИТ В КЛУБЕ ====== -->
     <section class="benefits-section" id="benefits">
         <div class="container">
             <div class="benefits-grid">
                 <div>
-                    <h2 class="reveal">Что это</h2>
+                    <h2 class="reveal">Что происходит в клубе</h2>
                     <ul class="benefits-list">
                         <li class="reveal reveal-delay-1">Одна общая книга в месяц</li>
                         <li class="reveal reveal-delay-2">Коучинговая рамка Лены и Юлии</li>
                         <li class="reveal reveal-delay-3">Вопросы и провокации два раза в неделю</li>
                         <li class="reveal reveal-delay-4">Живой чат для откликов, споров и узнаваний</li>
-                        <li class="reveal">Двухчасовая встреча в конце месяца</li>
+                        <li class="reveal">Двухчасовой звонок в конце месяца</li>
                         <li class="reveal reveal-delay-1">Практическое упражнение, которое переводит текст в личный процесс</li>
                     </ul>
                 </div>
@@ -1867,6 +2001,48 @@
                         <li>Не готова читать выбранную книгу месяца</li>
                         <li>Нужен литературный разбор приемов, эпохи и контекста</li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== АВТОРЫ ПРОЕКТА ====== -->
+    <section class="authors-section" id="authors">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="reveal">Ведущие</h2>
+            </div>
+            <div class="authors-grid">
+                <!-- Лена -->
+                <div class="author-card reveal">
+                    <div class="author-photo">
+                        <img src="Photos/ЛД2.jpg" alt="Лена Дегтярь">
+                    </div>
+                    <h3 class="author-name">Лена Дегтярь</h3>
+                    <div class="author-roles">
+                        <span>PhD</span>
+                        <span>Coach</span>
+                        <span>Игропрактик</span>
+                        <span>Автор курсов «Принятие себя» и «Анатомия эмоций»</span>
+                    </div>
+                    <div class="author-quote">
+                        <p>В этом формате книга становится не объектом разбора, а способом увидеть, где текст задевает живой материал: убеждения, реакции, выборы и отношения.</p>
+                    </div>
+                </div>
+                <!-- Юлия -->
+                <div class="author-card reveal reveal-delay-2">
+                    <div class="author-photo">
+                        <img src="Photos/ЮВ.jpg" alt="Юлия Воронина">
+                    </div>
+                    <h3 class="author-name">Юлия Воронина</h3>
+                    <div class="author-roles">
+                        <span>Executive Coach</span>
+                        <span>Практик телесной осознанности и дыхания</span>
+                        <span>ex-TOP in Tech</span>
+                    </div>
+                    <div class="author-quote">
+                        <p>Мне интересен разговор, где одна книга открывает разные внутренние маршруты. Не один правильный вывод, а несколько оптик, через которые человек точнее видит себя.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1940,41 +2116,41 @@
                 </div>
                 <div class="step-item reveal reveal-delay-3">
                     <div class="step-number">4</div>
-                    <h3>Приходишь на встречу</h3>
+                    <h3>Приходишь на звонок</h3>
                     <p>В конце месяца — двухчасовой разбор книги и коучинговое упражнение для переноса идеи в свою жизнь.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ====== КНИГА ИЮНЯ ====== -->
+    <!-- ====== КНИГА ИЮЛЯ ====== -->
     <section class="example-section" id="example">
         <div class="container">
             <div class="section-header">
-                <h2 class="reveal">Июнь</h2>
+                <h2 class="reveal">Июль</h2>
             </div>
-            <p class="example-subtitle reveal">Эрих Фромм, «Искусство любить». Будем читать о любви не как о чувстве, которое случается, а как о практике, зрелости и способе быть в мире.</p>
+            <p class="example-subtitle reveal">Лиза Марчиано, «Искра жизни. Раскрытие архетипической силы женщин». Будем читать о внутренней энергии, женских архетипах и тех местах, где жизненность возвращается не через усилие, а через контакт с собой.</p>
             <div class="example-cards">
                 <div class="example-card reveal">
                     <div class="example-book-header">
-                        <img src="Photos/notebook-books.jpg" alt="Книга и дневник для чтения" class="example-book-cover">
-                        <div class="example-book-title">Тема месяца: отношения как практика</div>
+                        <img src="assets/book-covers/lisa-marchiano-spark-of-life.jpg" alt="Обложка книги Лизы Марчиано «Искра жизни»" class="example-book-cover">
+                        <div class="example-book-title">Тема месяца: жизненность и женская сила</div>
                     </div>
                     <div class="example-field">
                         <div class="example-field-label">Вопросы месяца</div>
                         <div class="example-field-value">
-                            1. Где я думаю о любви как о состоянии, а где как о действии?<br>
-                            2. Какие идеи Фромма вызывают согласие, а какие сопротивление?<br>
-                            3. Что в моей жизни подтверждает или опровергает его тезисы?
+                            1. Где я чувствую свою «искру жизни», а где она приглушена?<br>
+                            2. Какие женские архетипы вызывают узнавание, интерес или сопротивление?<br>
+                            3. Что в моей жизни просит больше силы, игры, злости, нежности или свободы?
                         </div>
                     </div>
                     <div class="example-field">
                         <div class="example-field-label">Практический фокус</div>
-                        <div class="example-field-value">На встрече будем прикладывать идеи книги к конкретной зоне жизни: отношения, работа, родительство, выборы.</div>
+                        <div class="example-field-value">На звонке будем прикладывать идеи книги к конкретной зоне жизни: отношения, работа, творчество, тело, выборы.</div>
                     </div>
                     <div class="example-field">
                         <div class="example-field-label">Вброс в чат</div>
-                        <div class="example-field-value prompt">Выбери один тезис Фромма, с которым хочется поспорить. Принеси конкретный пример из своей жизни, где этот тезис не работает или работает иначе.</div>
+                        <div class="example-field-value prompt">Выбери один образ или идею из книги, которые зацепили сильнее всего. Принеси конкретный пример из жизни, где эта сила уже есть — или где ее не хватает.</div>
                     </div>
                     <div class="example-field">
                         <div class="example-field-value takeaway">Нам важно не прийти к одной правильной трактовке, а увидеть, как книга касается каждой из нас.</div>
@@ -1996,8 +2172,10 @@
                         <div class="example-field-value">Коучинговое упражнение: берем идею или паттерн из книги и прикладываем к конкретной жизненной ситуации.</div>
                     </div>
                     <div class="example-field">
-                        <div class="example-field-label">После</div>
-                        <div class="example-field-value prompt">Разговорная часть может стать подкастом, но практическое упражнение остается внутри закрытой группы.</div>
+                        <div class="example-field-label">Что говорили участницы после первого звонка</div>
+                        <div class="example-field-value prompt">«Можно раз в месяц прийти, поговорить и услышать разные точки зрения».</div>
+                        <div class="example-field-value prompt">«Мы не просто обсуждаем идеи книги, а смотрим, как они отзываются в нашей личной жизни».</div>
+                        <div class="example-field-value prompt">«Мне было комфортно делиться личным — без стеснения и сомнений».</div>
                     </div>
                     <div class="example-field">
                         <div class="example-field-value takeaway">Это формат участия, а не формат «послушать умный разговор».</div>
@@ -2017,12 +2195,12 @@
             <ol class="reading-list">
                 <li class="reading-list-item reveal">
                     <div class="reading-cover-frame">
-                        <img class="reading-cover" src="assets/book-covers/erich-fromm-art-of-loving.png" alt="Обложка книги Эриха Фромма «Искусство любить»" loading="lazy">
+                        <img class="reading-cover" src="assets/book-covers/lisa-marchiano-spark-of-life.jpg" alt="Обложка книги Лизы Марчиано «Искра жизни»" loading="lazy">
                     </div>
                     <div class="reading-copy">
-                        <span class="reading-month">Июнь</span>
-                        <span class="reading-title">«Искусство любить»</span>
-                        <span class="reading-author">Эрих Фромм</span>
+                        <span class="reading-month">Июль</span>
+                        <span class="reading-title">«Искра жизни. Раскрытие архетипической силы женщин»</span>
+                        <span class="reading-author">Лиза Марчиано</span>
                     </div>
                 </li>
                 <li class="reading-list-item reveal reveal-delay-1">
@@ -2030,22 +2208,12 @@
                         <img class="reading-cover" src="assets/book-covers/edith-eger-choice.png" alt="Обложка книги Эдит Евы Эгер «Выбор»" loading="lazy">
                     </div>
                     <div class="reading-copy">
-                        <span class="reading-month">Июль</span>
+                        <span class="reading-month">Август</span>
                         <span class="reading-title">«Выбор. О свободе и внутренней силе человека»</span>
                         <span class="reading-author">Эдит Ева Эгер</span>
                     </div>
                 </li>
                 <li class="reading-list-item reveal">
-                    <div class="reading-cover-frame">
-                        <img class="reading-cover" src="https://books.google.com/books/content?vid=ISBN9785002500574&amp;printsec=frontcover&amp;img=1&amp;zoom=2&amp;source=gbs_api" alt="Обложка книги Лизы Марчиано «Искра жизни»" loading="lazy">
-                    </div>
-                    <div class="reading-copy">
-                        <span class="reading-month">Август</span>
-                        <span class="reading-title">«Искра жизни. Раскрытие архетипической силы женщин»</span>
-                        <span class="reading-author">Лиза Марчиано</span>
-                    </div>
-                </li>
-                <li class="reading-list-item reveal reveal-delay-1">
                     <div class="reading-cover-frame">
                         <img class="reading-cover" src="assets/book-covers/irvin-yalom-staring-at-the-sun.png" alt="Обложка книги Ирвина Ялома «Вглядываясь в солнце»" loading="lazy">
                     </div>
@@ -2055,7 +2223,7 @@
                         <span class="reading-author">Ирвин Ялом</span>
                     </div>
                 </li>
-                <li class="reading-list-item reveal">
+                <li class="reading-list-item reveal reveal-delay-1">
                     <div class="reading-cover-frame">
                         <img class="reading-cover" src="assets/book-covers/lindsay-gibson-adult-children.png" alt="Обложка книги Линдси К. Гибсон «Взрослые дети эмоционально незрелых родителей»" loading="lazy">
                     </div>
@@ -2065,7 +2233,7 @@
                         <span class="reading-author">Линдси К. Гибсон</span>
                     </div>
                 </li>
-                <li class="reading-list-item reveal reveal-delay-1">
+                <li class="reading-list-item reveal">
                     <div class="reading-cover-frame">
                         <img class="reading-cover" src="assets/book-covers/ester-perel-pravo-na-levo.png" alt="Обложка книги Эстер Перель «Право на „лево“»" loading="lazy">
                     </div>
@@ -2073,6 +2241,16 @@
                         <span class="reading-month">Ноябрь</span>
                         <span class="reading-title">«Право на „лево“. Почему люди изменяют и можно ли избежать измен»</span>
                         <span class="reading-author">Эстер Перель</span>
+                    </div>
+                </li>
+                <li class="reading-list-item reveal reveal-delay-1">
+                    <div class="reading-cover-frame">
+                        <img class="reading-cover" src="assets/book-covers/paul-kalanithi-when-breath-becomes-air.png" alt="Обложка книги Пола Каланити «Когда дыхание растворяется в воздухе»" loading="lazy">
+                    </div>
+                    <div class="reading-copy">
+                        <span class="reading-month">Декабрь</span>
+                        <span class="reading-title">«Когда дыхание растворяется в воздухе. Иногда судьбе все равно, что ты врач»</span>
+                        <span class="reading-author">Пол Каланити</span>
                     </div>
                 </li>
             </ol>
@@ -2089,98 +2267,6 @@
         </svg>
     </div>
 
-    <!-- ====== РИТМ КЛУБА ====== -->
-    <section class="rhythm-section" id="rhythm">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="reveal">Ритм клуба</h2>
-            </div>
-            <div class="rhythm-grid">
-                <div class="rhythm-card reveal" style="--i: 0;">
-                    <div class="rhythm-icon">
-                        <svg viewBox="0 0 24 24">
-                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                            <line x1="16" y1="2" x2="16" y2="6"/>
-                            <line x1="8" y1="2" x2="8" y2="6"/>
-                            <line x1="3" y1="10" x2="21" y2="10"/>
-                        </svg>
-                    </div>
-                    <span class="rhythm-frequency">Каждый понедельник</span>
-                    <h3>Книга и тема месяца</h3>
-                    <p>Мы объявляем книгу и рамку чтения, чтобы у группы был общий материал и общий вопрос.</p>
-                </div>
-                <div class="rhythm-card reveal" style="--i: 1;">
-                    <div class="rhythm-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                            <polyline points="14 2 14 8 20 8"/>
-                            <line x1="16" y1="13" x2="8" y2="13"/>
-                            <line x1="16" y1="17" x2="8" y2="17"/>
-                        </svg>
-                    </div>
-                    <span class="rhythm-frequency">Два раза в неделю</span>
-                    <h3>Вопросы и провокации</h3>
-                    <p>Проверить тезис автора на своей жизни, найти параллель, сформулировать несогласие, принести пример.</p>
-                </div>
-                <div class="rhythm-card reveal" style="--i: 2;">
-                    <div class="rhythm-icon">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                            <circle cx="9" cy="7" r="4"/>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                        </svg>
-                    </div>
-                    <span class="rhythm-frequency">В конце месяца</span>
-                    <h3>Двухчасовая встреча</h3>
-                    <p>Первая часть — разбор книги через две оптики. Вторая — коучинговое упражнение с материалом книги.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ====== АВТОРЫ ПРОЕКТА ====== -->
-    <section class="authors-section" id="authors">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="reveal">Ведущие</h2>
-            </div>
-            <div class="authors-grid">
-                <!-- Лена -->
-                <div class="author-card reveal">
-                    <div class="author-photo">
-                        <img src="Photos/ЛД2.jpg" alt="Лена Дегтярь">
-                    </div>
-                    <h3 class="author-name">Лена Дегтярь</h3>
-                    <div class="author-roles">
-                        <span>PhD</span>
-                        <span>Coach</span>
-                        <span>Игропрактик</span>
-                        <span>Автор курсов «Принятие себя» и «Анатомия эмоций»</span>
-                    </div>
-                    <div class="author-quote">
-                        <p>В этом формате книга становится не объектом разбора, а способом увидеть, где текст задевает живой материал: убеждения, реакции, выборы и отношения.</p>
-                    </div>
-                </div>
-                <!-- Юлия -->
-                <div class="author-card reveal reveal-delay-2">
-                    <div class="author-photo">
-                        <img src="Photos/ЮВ.jpg" alt="Юлия Воронина">
-                    </div>
-                    <h3 class="author-name">Юлия Воронина</h3>
-                    <div class="author-roles">
-                        <span>Executive Coach</span>
-                        <span>Практик телесной осознанности и дыхания</span>
-                        <span>ex-TOP in Tech</span>
-                    </div>
-                    <div class="author-quote">
-                        <p>Мне интересен разговор, где одна книга открывает разные внутренние маршруты. Не один правильный вывод, а несколько оптик, через которые человек точнее видит себя.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- ====== ПРАВИЛА (мягко) ====== -->
     <section class="rules-section" id="rules">
         <div class="container">
@@ -2190,7 +2276,7 @@
             <p class="rules-intro reveal">Формат держится на чтении, участии и готовности работать с собой через текст.</p>
             <ul class="rules-list">
                 <li class="reveal">Не литературный клуб: мы не разбираем приемы автора, эпоху и культурный контекст как главную цель</li>
-                <li class="reveal reveal-delay-1">Не подкаст: подкаст может быть побочным продуктом, но не заменяет закрытую встречу</li>
+                <li class="reveal reveal-delay-1">Не подкаст: подкаст может быть побочным продуктом, но не заменяет закрытый звонок</li>
                 <li class="reveal reveal-delay-2">Не «приходи послушать»: чтение обязательно</li>
                 <li class="reveal reveal-delay-3">Не пассивное потребление: важны отклики, вопросы и участие в группе</li>
                 <li class="reveal reveal-delay-4">Не формат индивидуального списка: в месяц у группы одна общая книга</li>
