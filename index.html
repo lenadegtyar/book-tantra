@@ -187,7 +187,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 60px 28px;
+            padding: 60px clamp(24px, 5vw, 84px);
             position: relative;
             overflow: hidden;
             /* Background image — замени hero-bg.jpg на свою фотографию */
@@ -277,7 +277,8 @@
             position: relative;
             z-index: 2;
             width: 100%;
-            max-width: 1120px;
+            max-width: 1280px;
+            min-width: 0;
         }
 
         .hero-logo {
@@ -313,20 +314,22 @@
         }
 
         .hero-book-hero h1 {
-            font-size: clamp(3.2rem, 6.4vw, 5.4rem);
+            font-size: clamp(3rem, 5.2vw, 5rem);
             margin-bottom: 28px;
+            max-width: 9.5em;
+            overflow-wrap: normal;
         }
 
         .hero-layout {
             display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(360px, 0.78fr);
-            gap: 64px;
+            grid-template-columns: minmax(0, 0.92fr) minmax(420px, 0.78fr);
+            gap: clamp(40px, 5vw, 78px);
             align-items: center;
             text-align: left;
         }
 
         .hero-copy {
-            max-width: 620px;
+            max-width: 660px;
             min-width: 0;
         }
 
@@ -1762,6 +1765,44 @@
         /* ============================
            RESPONSIVE
            ============================ */
+        @media (max-width: 1180px) {
+            .hero {
+                padding-left: 44px;
+                padding-right: 44px;
+            }
+
+            .hero-layout {
+                grid-template-columns: 1fr;
+                gap: 48px;
+                text-align: center;
+            }
+
+            .hero-copy {
+                max-width: 760px;
+                margin: 0 auto;
+            }
+
+            .hero-book-hero h1 {
+                max-width: none;
+            }
+
+            .hero-book-hero .hero-subtitle {
+                max-width: 720px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-format-strip,
+            .hero-actions {
+                justify-content: center;
+            }
+
+            .hero-spotlight {
+                max-width: 720px;
+                margin: 0 auto;
+            }
+        }
+
         @media (max-width: 960px) {
             .pain-grid,
             .integration-grid,
@@ -1788,22 +1829,6 @@
 
             .hero-book-hero .hero-subtitle {
                 margin-bottom: 28px;
-            }
-
-            .hero-layout {
-                grid-template-columns: 1fr;
-                gap: 44px;
-                text-align: center;
-            }
-
-            .hero-copy {
-                max-width: 680px;
-                margin: 0 auto;
-            }
-
-            .hero-format-strip,
-            .hero-actions {
-                justify-content: center;
             }
 
             .hero-spotlight {
@@ -1836,9 +1861,17 @@
         @media (max-width: 600px) {
             section { padding: 80px 0; }
 
+            .hero {
+                padding-left: 28px;
+                padding-right: 28px;
+            }
+
             .hero h1 { font-size: 2.6rem; }
 
-            .hero-book-hero h1 { font-size: 3.15rem; }
+            .hero-book-hero h1 {
+                font-size: clamp(2rem, 8.2vw, 2.55rem);
+                letter-spacing: -0.015em;
+            }
 
             .hero-book-hero .hero-subtitle {
                 font-size: 1.05rem;
