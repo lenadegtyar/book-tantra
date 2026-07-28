@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Трансформационное чтение — Лена Дегтярь и Юлия Воронина</title>
+    <meta name="description" content="Книжный клуб Лены Дегтярь и Юлии Ворониной. В августе читаем Эдит Эгер «Выбор»: обсуждаем свободу, внутреннюю опору и способность отвечать на обстоятельства своей жизни.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
@@ -863,6 +864,25 @@
             z-index: 1;
         }
 
+        .reading-list-item.is-current {
+            background:
+                linear-gradient(135deg, rgba(232, 242, 240, 0.96), rgba(250, 247, 240, 0.96));
+        }
+
+        .reading-list-item.is-current .reading-month {
+            color: var(--teal-deep);
+        }
+
+        .reading-list-item.is-current .reading-month::after {
+            content: 'сейчас';
+            margin-left: 10px;
+            padding: 3px 8px;
+            border: 1px solid rgba(42, 107, 124, 0.24);
+            border-radius: 999px;
+            font-size: 0.82em;
+            letter-spacing: 0.12em;
+        }
+
         .reading-list-item::after {
             content: '';
             position: absolute;
@@ -936,6 +956,173 @@
             margin-top: 10px;
             color: var(--teal-deep);
             font-size: 0.92em;
+        }
+
+        /* ============================
+           READ BOOKS ARCHIVE
+           ============================ */
+        .archive-section {
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 9% 16%, rgba(196, 162, 101, 0.1), transparent 28%),
+                radial-gradient(circle at 90% 82%, rgba(123, 184, 181, 0.1), transparent 30%),
+                var(--parchment);
+        }
+
+        .archive-heading {
+            display: grid;
+            grid-template-columns: minmax(0, 0.72fr) minmax(320px, 1fr);
+            gap: 64px;
+            align-items: end;
+            margin-bottom: 64px;
+        }
+
+        .archive-kicker {
+            display: block;
+            margin-bottom: 14px;
+            color: var(--gold-dark);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.82em;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .archive-intro {
+            max-width: 620px;
+            color: var(--text-soft);
+        }
+
+        .archive-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 28px;
+        }
+
+        .archive-card {
+            min-width: 0;
+            padding: 42px;
+            position: relative;
+            overflow: hidden;
+            background: rgba(245, 237, 224, 0.68);
+            border: 1px solid rgba(196, 162, 101, 0.16);
+            box-shadow: 0 24px 64px rgba(30, 58, 95, 0.07);
+        }
+
+        .archive-card:nth-child(2) {
+            background: rgba(232, 242, 240, 0.68);
+            border-color: rgba(42, 107, 124, 0.13);
+        }
+
+        .archive-card::before {
+            content: attr(data-number);
+            position: absolute;
+            top: -42px;
+            right: 18px;
+            font-family: 'Playfair Display', serif;
+            font-size: 10rem;
+            font-weight: 900;
+            line-height: 1;
+            color: rgba(196, 162, 101, 0.08);
+            pointer-events: none;
+        }
+
+        .archive-card:nth-child(2)::before {
+            color: rgba(42, 107, 124, 0.07);
+        }
+
+        .archive-book {
+            display: grid;
+            grid-template-columns: 94px minmax(0, 1fr);
+            gap: 24px;
+            align-items: start;
+            margin-bottom: 34px;
+            position: relative;
+        }
+
+        .archive-cover {
+            width: 94px;
+            aspect-ratio: 2 / 3;
+            object-fit: cover;
+            border-radius: 3px 7px 7px 3px;
+            box-shadow:
+                -4px 5px 0 rgba(196, 162, 101, 0.18),
+                0 16px 30px rgba(30, 58, 95, 0.16);
+        }
+
+        .archive-month {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--gold-dark);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.76em;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .archive-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.45rem, 2.5vw, 2rem);
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--navy);
+        }
+
+        .archive-author {
+            margin-top: 8px;
+            color: var(--teal-deep);
+            font-size: 0.9em;
+        }
+
+        .archive-label {
+            margin-bottom: 12px;
+            color: var(--teal-deep);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.78em;
+            font-weight: 600;
+            letter-spacing: 0.17em;
+            text-transform: uppercase;
+        }
+
+        .archive-summary {
+            position: relative;
+            color: var(--text-soft);
+            line-height: 1.75;
+        }
+
+        .archive-points {
+            display: grid;
+            gap: 12px;
+            margin-top: 24px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .archive-points li {
+            padding-left: 22px;
+            position: relative;
+            color: var(--text-soft);
+            font-size: 0.91em;
+            line-height: 1.65;
+        }
+
+        .archive-points li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+
+        .archive-takeaway {
+            margin-top: 30px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(196, 162, 101, 0.18);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2em;
+            font-style: italic;
+            line-height: 1.5;
+            color: var(--navy);
         }
 
         /* ============================
@@ -1828,6 +2015,18 @@
                 max-width: 620px;
             }
 
+            .archive-heading {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                max-width: 720px;
+            }
+
+            .archive-grid {
+                grid-template-columns: 1fr;
+                max-width: 720px;
+                margin: 0 auto;
+            }
+
             .hero-book-hero .hero-subtitle {
                 margin-bottom: 28px;
             }
@@ -1917,6 +2116,28 @@
 
             .reading-title { font-size: 1.25rem; }
 
+            .archive-heading {
+                margin-bottom: 42px;
+            }
+
+            .archive-card {
+                padding: 30px 26px 34px;
+            }
+
+            .archive-book {
+                grid-template-columns: 76px minmax(0, 1fr);
+                gap: 18px;
+                margin-bottom: 28px;
+            }
+
+            .archive-cover {
+                width: 76px;
+            }
+
+            .archive-title {
+                font-size: 1.4rem;
+            }
+
             .pricing-amount { font-size: 2.5rem; }
 
             .hero-mandala { width: 400px; height: 400px; }
@@ -1934,8 +2155,9 @@
         <button class="nav-dot" data-section="authors" aria-label="Ведущие"></button>
         <button class="nav-dot" data-section="ai" aria-label="Двойная оптика"></button>
         <button class="nav-dot" data-section="steps" aria-label="Как это работает"></button>
-        <button class="nav-dot" data-section="example" aria-label="Книга июля"></button>
-        <button class="nav-dot" data-section="books" aria-label="Расписание на ближайшие шесть месяцев"></button>
+        <button class="nav-dot" data-section="example" aria-label="Книга августа"></button>
+        <button class="nav-dot" data-section="books" aria-label="Что читаем дальше"></button>
+        <button class="nav-dot" data-section="archive" aria-label="Прочитано в клубе"></button>
         <button class="nav-dot" data-section="pricing" aria-label="Стоимость"></button>
     </nav>
 
@@ -1954,10 +2176,10 @@
         <div class="hero-content hero-book-hero">
             <div class="hero-layout">
                 <div class="hero-copy">
-                    <span class="hero-badge">Книжный клуб · старт 1 июля</span>
+                    <span class="hero-badge">Новый цикл · август</span>
                     <p class="hero-authors-line">Лена Дегтярь &amp; Юлия Воронина</p>
                     <h1>Трансформационное<br>чтение</h1>
-                    <p class="hero-subtitle">Книжный клуб, где каждый месяц одна общая книга становится материалом для разговора, личных вопросов и коучингового упражнения.</p>
+                    <p class="hero-subtitle">Книжный клуб, где каждый месяц одна общая книга становится материалом для разговора, личных вопросов и более точного выбора.</p>
                     <ul class="hero-format-strip" aria-label="Формат клуба">
                         <li>Одна книга в месяц</li>
                         <li>Вопросы в чате</li>
@@ -1965,15 +2187,15 @@
                     </ul>
                     <div class="hero-actions">
                         <a href="https://t.me/booktantra_bot" class="hero-link primary" target="_blank" rel="noopener">Присоединиться</a>
-                        <a href="#books" class="hero-link">Расписание</a>
+                        <a href="#example" class="hero-link">Книга августа</a>
                     </div>
                 </div>
                 <aside class="hero-spotlight" aria-label="Сейчас читаем">
-                    <img src="assets/book-covers/lisa-marchiano-spark-of-life.jpg" alt="Обложка книги Лизы Марчиано «Искра жизни»" class="hero-book-cover">
+                    <img src="assets/book-covers/edith-eger-choice.png" alt="Обложка книги Эдит Евы Эгер «Выбор»" class="hero-book-cover">
                     <div>
-                        <span class="hero-theme-label">Сейчас читаем в июле</span>
-                        <div class="hero-theme-title">Лиза Марчиано<br>«Искра жизни»</div>
-                        <p class="hero-theme-note">Тема месяца: жизненность и женская сила. Будем читать о внутренней энергии, женских архетипах и тех местах, где жизненность возвращается через контакт с собой.</p>
+                        <span class="hero-theme-label">Читаем в августе</span>
+                        <div class="hero-theme-title">Эдит Ева Эгер<br>«Выбор»</div>
+                        <p class="hero-theme-note">Тема месяца: свобода и внутренняя опора. Будем смотреть не на то, как контролировать обстоятельства, а на то, какой ответ на них остаётся в нашей власти.</p>
                     </div>
                 </aside>
             </div>
@@ -1992,8 +2214,8 @@
                         <li class="reveal reveal-delay-2">Коучинговая рамка Лены и Юлии</li>
                         <li class="reveal reveal-delay-3">Вопросы и провокации два раза в неделю</li>
                         <li class="reveal reveal-delay-4">Живой чат для откликов, споров и узнаваний</li>
-                        <li class="reveal">Двухчасовой звонок в конце месяца</li>
-                        <li class="reveal reveal-delay-1">Практическое упражнение, которое переводит текст в личный процесс</li>
+                        <li class="reveal">Закрытый звонок в конце месяца</li>
+                        <li class="reveal reveal-delay-1">Две оптики ведущих и открытый разговор группы</li>
                     </ul>
                 </div>
                 <div class="benefits-visual">
@@ -2151,43 +2373,43 @@
                 <div class="step-item reveal reveal-delay-3">
                     <div class="step-number">4</div>
                     <h3>Приходишь на звонок</h3>
-                    <p>В конце месяца — двухчасовой разбор книги и коучинговое упражнение для переноса идеи в свою жизнь.</p>
+                    <p>В конце месяца Лена и Юлия открывают разговор своими оптиками, а дальше книга становится материалом для живого обсуждения группы.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ====== КНИГА ИЮЛЯ ====== -->
+    <!-- ====== КНИГА АВГУСТА ====== -->
     <section class="example-section" id="example">
         <div class="container">
             <div class="section-header">
-                <h2 class="reveal">Июль</h2>
+                <h2 class="reveal">Август · «Выбор»</h2>
             </div>
-            <p class="example-subtitle reveal">Лиза Марчиано, «Искра жизни. Раскрытие архетипической силы женщин». Будем читать о внутренней энергии, женских архетипах и тех местах, где жизненность возвращается не через усилие, а через контакт с собой.</p>
+            <p class="example-subtitle reveal">Эдит Ева Эгер пишет о свободе, которая начинается не с идеальных обстоятельств, а с возможности выбирать свой ответ на них.</p>
             <div class="example-cards">
                 <div class="example-card reveal">
                     <div class="example-book-header">
-                        <img src="assets/book-covers/lisa-marchiano-spark-of-life.jpg" alt="Обложка книги Лизы Марчиано «Искра жизни»" class="example-book-cover">
-                        <div class="example-book-title">Тема месяца: жизненность и женская сила</div>
+                        <img src="assets/book-covers/edith-eger-choice.png" alt="Обложка книги Эдит Евы Эгер «Выбор»" class="example-book-cover">
+                        <div class="example-book-title">Тема месяца: свобода и внутренняя опора</div>
                     </div>
                     <div class="example-field">
                         <div class="example-field-label">Вопросы месяца</div>
                         <div class="example-field-value">
-                            1. Где я чувствую свою «искру жизни», а где она приглушена?<br>
-                            2. Какие женские архетипы вызывают узнавание, интерес или сопротивление?<br>
-                            3. Что в моей жизни просит больше силы, игры, злости, нежности или свободы?
+                            1. Где я жду, что сначала изменятся обстоятельства — и только потом начнётся жизнь?<br>
+                            2. Что в моей истории является фактом, а что — позицией, которую я заняла по отношению к нему?<br>
+                            3. Как выглядит выбор в пользу жизни не вообще, а в моей реальности сейчас?
                         </div>
                     </div>
                     <div class="example-field">
                         <div class="example-field-label">Практический фокус</div>
-                        <div class="example-field-value">На звонке будем прикладывать идеи книги к конкретной зоне жизни: отношения, работа, творчество, тело, выборы.</div>
+                        <div class="example-field-value">Будем замечать ситуации, где автоматическая реакция отнимает субъектность, и искать тот выбор, который действительно остаётся доступен.</div>
                     </div>
                     <div class="example-field">
                         <div class="example-field-label">Вброс в чат</div>
-                        <div class="example-field-value prompt">Выбери один образ или идею из книги, которые зацепили сильнее всего. Принеси конкретный пример из жизни, где эта сила уже есть — или где ее не хватает.</div>
+                        <div class="example-field-value prompt">Назови ситуацию, которую ты не выбирала. Что в ней точно вне твоего контроля — и какой выбор всё-таки остаётся твоим?</div>
                     </div>
                     <div class="example-field">
-                        <div class="example-field-value takeaway">Нам важно не прийти к одной правильной трактовке, а увидеть, как книга касается каждой из нас.</div>
+                        <div class="example-field-value takeaway">Выбор — не отрицание боли. Это возвращение себе места участницы собственной жизни.</div>
                     </div>
                 </div>
                 <div class="example-card reveal reveal-delay-2">
@@ -2198,46 +2420,34 @@
                     <div class="example-field">
                         <div class="example-field-label">Первая часть</div>
                         <div class="example-field-value">
-                            Разбор книги через две независимые оптики Лены и Юлии: где они согласны, где спорят, что видят по-разному.
+                            Лена и Юлия собирают свои независимые оптики: где согласны с книгой, где спорят и что видят по-разному.
                         </div>
                     </div>
                     <div class="example-field">
                         <div class="example-field-label">Вторая часть</div>
-                        <div class="example-field-value">Коучинговое упражнение: берем идею или паттерн из книги и прикладываем к конкретной жизненной ситуации.</div>
+                        <div class="example-field-value">Открытый разговор группы: цитаты, сопротивление, личные истории и вопросы, которые возникли по ходу чтения.</div>
                     </div>
                     <div class="example-field">
-                        <div class="example-field-label">Что говорили участницы после первого звонка</div>
-                        <div class="example-field-value prompt">«Можно раз в месяц прийти, поговорить и услышать разные точки зрения».</div>
-                        <div class="example-field-value prompt">«Мы не просто обсуждаем идеи книги, а смотрим, как они отзываются в нашей личной жизни».</div>
-                        <div class="example-field-value prompt">«Мне было комфортно делиться личным — без стеснения и сомнений».</div>
+                        <div class="example-field-label">Дата встречи</div>
+                        <div class="example-field-value prompt">Финальный звонок пройдёт в выходной день. Точную дату выберем голосованием в закрытом чате.</div>
                     </div>
                     <div class="example-field">
-                        <div class="example-field-value takeaway">Это формат участия, а не формат «послушать умный разговор».</div>
+                        <div class="example-field-value takeaway">Можно прийти не с готовым выводом, а с местом, где книга задела, разозлила или изменила вопрос.</div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ====== КНИГИ НА ШЕСТЬ МЕСЯЦЕВ ====== -->
+    <!-- ====== ЧТО ЧИТАЕМ ДАЛЬШЕ ====== -->
     <section class="reading-list-section" id="books">
         <div class="container">
             <div class="section-header">
-                <h2 class="reveal">Расписание на ближайшие шесть месяцев</h2>
-                <p class="reading-list-intro reveal">Одна общая книга в месяц.</p>
+                <h2 class="reveal">Что читаем дальше</h2>
+                <p class="reading-list-intro reveal">Одна общая книга в месяц. План задаёт направление, а актуальная книга всегда отмечена отдельно.</p>
             </div>
             <ol class="reading-list">
-                <li class="reading-list-item reveal">
-                    <div class="reading-cover-frame">
-                        <img class="reading-cover" src="assets/book-covers/lisa-marchiano-spark-of-life.jpg" alt="Обложка книги Лизы Марчиано «Искра жизни»" loading="lazy">
-                    </div>
-                    <div class="reading-copy">
-                        <span class="reading-month">Июль</span>
-                        <span class="reading-title">«Искра жизни. Раскрытие архетипической силы женщин»</span>
-                        <span class="reading-author">Лиза Марчиано</span>
-                    </div>
-                </li>
-                <li class="reading-list-item reveal reveal-delay-1">
+                <li class="reading-list-item is-current reveal">
                     <div class="reading-cover-frame">
                         <img class="reading-cover" src="assets/book-covers/edith-eger-choice.png" alt="Обложка книги Эдит Евы Эгер «Выбор»" loading="lazy">
                     </div>
@@ -2247,7 +2457,7 @@
                         <span class="reading-author">Эдит Ева Эгер</span>
                     </div>
                 </li>
-                <li class="reading-list-item reveal">
+                <li class="reading-list-item reveal reveal-delay-1">
                     <div class="reading-cover-frame">
                         <img class="reading-cover" src="assets/book-covers/irvin-yalom-staring-at-the-sun.png" alt="Обложка книги Ирвина Ялома «Вглядываясь в солнце»" loading="lazy">
                     </div>
@@ -2257,7 +2467,7 @@
                         <span class="reading-author">Ирвин Ялом</span>
                     </div>
                 </li>
-                <li class="reading-list-item reveal reveal-delay-1">
+                <li class="reading-list-item reveal">
                     <div class="reading-cover-frame">
                         <img class="reading-cover" src="assets/book-covers/lindsay-gibson-adult-children.png" alt="Обложка книги Линдси К. Гибсон «Взрослые дети эмоционально незрелых родителей»" loading="lazy">
                     </div>
@@ -2267,7 +2477,7 @@
                         <span class="reading-author">Линдси К. Гибсон</span>
                     </div>
                 </li>
-                <li class="reading-list-item reveal">
+                <li class="reading-list-item reveal reveal-delay-1">
                     <div class="reading-cover-frame">
                         <img class="reading-cover" src="assets/book-covers/ester-perel-pravo-na-levo.png" alt="Обложка книги Эстер Перель «Право на „лево“»" loading="lazy">
                     </div>
@@ -2277,7 +2487,7 @@
                         <span class="reading-author">Эстер Перель</span>
                     </div>
                 </li>
-                <li class="reading-list-item reveal reveal-delay-1">
+                <li class="reading-list-item reveal">
                     <div class="reading-cover-frame">
                         <img class="reading-cover" src="assets/book-covers/paul-kalanithi-when-breath-becomes-air.png" alt="Обложка книги Пола Каланити «Когда дыхание растворяется в воздухе»" loading="lazy">
                     </div>
@@ -2288,6 +2498,59 @@
                     </div>
                 </li>
             </ol>
+        </div>
+    </section>
+
+    <!-- ====== АРХИВ ПРОЧИТАННЫХ КНИГ ====== -->
+    <section class="archive-section" id="archive">
+        <div class="container">
+            <div class="archive-heading">
+                <div>
+                    <span class="archive-kicker reveal">След чтения</span>
+                    <h2 class="reveal">Прочитано в клубе</h2>
+                </div>
+                <p class="archive-intro reveal">Здесь не пересказы книг. Это короткая фиксация того, что появилось между текстом, опытом участниц и разговором группы.</p>
+            </div>
+
+            <div class="archive-grid">
+                <article class="archive-card reveal" data-number="01">
+                    <div class="archive-book">
+                        <img src="assets/book-covers/erich-fromm-art-of-loving.png" alt="Обложка книги Эриха Фромма «Искусство любить»" class="archive-cover" loading="lazy">
+                        <div>
+                            <span class="archive-month">Июнь 2026</span>
+                            <h3 class="archive-title">«Искусство любить»</h3>
+                            <p class="archive-author">Эрих Фромм</p>
+                        </div>
+                    </div>
+                    <p class="archive-label">Что родилось в разговоре</p>
+                    <p class="archive-summary">Мы начали с любви как чувства, а пришли к любви как практике внимания. Не к обещанию «всё время чувствовать правильно», а к способности снова и снова выбирать заботу, уважение и присутствие.</p>
+                    <ul class="archive-points">
+                        <li>Любовь к себе оказалась не эгоизмом, а основанием, с которого можно увидеть другого.</li>
+                        <li>Контакт начинается не в похожести, а в моменте, когда мы выдерживаем различие.</li>
+                        <li>Ответственность прозвучала как response-ability — возможность ответить, а не тяжёлая обязанность.</li>
+                    </ul>
+                    <p class="archive-takeaway">«Всё, что мы можем дать другому, — это качество нашего внимания».</p>
+                </article>
+
+                <article class="archive-card reveal reveal-delay-2" data-number="02">
+                    <div class="archive-book">
+                        <img src="assets/book-covers/lisa-marchiano-spark-of-life.jpg" alt="Обложка книги Лизы Марчиано «Искра жизни»" class="archive-cover" loading="lazy">
+                        <div>
+                            <span class="archive-month">Июль 2026</span>
+                            <h3 class="archive-title">«Искра жизни»</h3>
+                            <p class="archive-author">Лиза Марчиано</p>
+                        </div>
+                    </div>
+                    <p class="archive-label">Что родилось в разговоре</p>
+                    <p class="archive-summary">Разговор об архетипах стал разговором о свободе не застревать в одной роли. Не выбирать между удобной Евой и изгнанной Лилит, а возвращать себе весь спектр — прямоту, хитрость, гнев, нежность, слёзы и право ничего не делать.</p>
+                    <ul class="archive-points">
+                        <li>«Хорошая девочка» проявилась не как слабость, а как когда-то необходимый способ сохранить безопасность и контакт.</li>
+                        <li>Независимость стала суверенностью: я могу без тебя, но свободна выбирать быть с тобой.</li>
+                        <li>Даже пассивность может быть действием, если это осознанный выбор, а не автоматическое исчезновение.</li>
+                    </ul>
+                    <p class="archive-takeaway">Свобода — не стать Лилит вместо Евы, а получить доступ к обеим и выбирать по контексту.</p>
+                </article>
+            </div>
         </div>
     </section>
 
