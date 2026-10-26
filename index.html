@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Трансформационное чтение — Лена Дегтярь и Юлия Воронина</title>
-    <meta name="description" content="Книжный клуб Лены Дегтярь и Юлии Ворониной. В октябре читаем Линдси К. Гибсон «Взрослые дети эмоционально незрелых родителей» и исследуем, что из детского опыта продолжает управлять взрослой жизнью.">
+    <meta name="description" content="Книжный клуб Лены Дегтярь и Юлии Ворониной. В ноябре читаем Эстер Перель «Право на „лево“» и исследуем желание, верность, тайну и устройство современных отношений.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
@@ -1734,6 +1734,35 @@
             margin-top: 8px;
         }
 
+        .meeting-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .meeting-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 42px;
+            padding: 10px 15px;
+            border: 1px solid rgba(42, 107, 124, 0.28);
+            color: var(--teal-deep);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95em;
+            font-weight: 600;
+            letter-spacing: 0.35px;
+            text-decoration: none;
+            transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+        }
+
+        .meeting-link:hover {
+            background: var(--teal-deep);
+            border-color: var(--teal-deep);
+            color: var(--cream);
+        }
+
         @media (max-width: 960px) {
             .example-cards { grid-template-columns: 1fr; max-width: 520px; }
             .example-book-cover { width: 60px; }
@@ -2187,7 +2216,7 @@
         <button class="nav-dot" data-section="authors" aria-label="Ведущие"></button>
         <button class="nav-dot" data-section="ai" aria-label="Двойная оптика"></button>
         <button class="nav-dot" data-section="steps" aria-label="Как это работает"></button>
-        <button class="nav-dot" data-section="example" aria-label="Книга октября"></button>
+        <button class="nav-dot" data-section="example" aria-label="Книга ноября"></button>
         <button class="nav-dot" data-section="books" aria-label="Что читаем дальше"></button>
         <button class="nav-dot" data-section="archive" aria-label="Прочитано в клубе"></button>
         <button class="nav-dot" data-section="pricing" aria-label="Стоимость"></button>
@@ -2208,7 +2237,7 @@
         <div class="hero-content hero-book-hero">
             <div class="hero-layout">
                 <div class="hero-copy">
-                    <span class="hero-badge">Октябрь · читаем вместе</span>
+                    <span class="hero-badge">Ноябрь · читаем вместе</span>
                     <p class="hero-authors-line">Лена Дегтярь &amp; Юлия Воронина</p>
                     <h1>Трансформационное<br>чтение</h1>
                     <p class="hero-subtitle">Книжный клуб, где каждый месяц одна общая книга становится материалом для разговора, личных вопросов и более точного выбора.</p>
@@ -2219,15 +2248,15 @@
                     </ul>
                     <div class="hero-actions">
                         <a href="https://t.me/booktantra_bot" class="hero-link primary" target="_blank" rel="noopener">Присоединиться</a>
-                        <a href="#example" class="hero-link">Книга октября</a>
+                        <a href="#example" class="hero-link">Книга ноября</a>
                     </div>
                 </div>
                 <aside class="hero-spotlight" aria-label="Сейчас читаем">
-                    <img src="assets/book-covers/lindsay-gibson-adult-children-telegram.jpg" alt="Обложка книги Линдси К. Гибсон «Взрослые дети эмоционально незрелых родителей»" class="hero-book-cover">
+                    <img src="assets/book-covers/ester-perel-pravo-na-levo-telegram.jpg" alt="Обложка книги Эстер Перель «Право на „лево“»" class="hero-book-cover">
                     <div>
-                        <span class="hero-theme-label">Читаем в октябре</span>
-                        <div class="hero-theme-title">Линдси К. Гибсон<br>«Взрослые дети эмоционально незрелых родителей»</div>
-                        <p class="hero-theme-note">Не о том, что родители сделали неправильно, а о том, что из этого опыта продолжает жить в нас: сверхответственность, сомнение в собственных чувствах и близость, которую будто нужно заслужить.</p>
+                        <span class="hero-theme-label">Читаем в ноябре</span>
+                        <div class="hero-theme-title">Эстер Перель<br>«Право на „лево“»</div>
+                        <p class="hero-theme-note">Не только о нарушении договора, а о том, что измена обнаруживает в отношениях: желание, тайну, близость, потерю и ожидания, которые мы связываем с современной любовью.</p>
                     </div>
                 </aside>
             </div>
@@ -2411,37 +2440,37 @@
         </div>
     </section>
 
-    <!-- ====== КНИГА ОКТЯБРЯ ====== -->
+    <!-- ====== КНИГА НОЯБРЯ ====== -->
     <section class="example-section" id="example">
         <div class="container">
             <div class="section-header">
-                <h2 class="reveal">Октябрь · «Взрослые дети эмоционально незрелых родителей»</h2>
+                <h2 class="reveal">Ноябрь · «Право на „лево“»</h2>
             </div>
-            <p class="example-subtitle reveal">Линдси К. Гибсон предлагает увидеть не только прошлое, но и то, как эмоциональная незрелость родителей продолжает организовывать взрослую жизнь: отношения, границы, ответственность и право на собственные чувства.</p>
+            <p class="example-subtitle reveal">Эстер Перель предлагает смотреть на измену не только как на нарушение договора, но и как на кризис, который поднимает вопросы желания, тайны, близости и устройства современного брака.</p>
             <div class="example-cards">
                 <div class="example-card reveal">
                     <div class="example-book-header">
-                        <img src="assets/book-covers/lindsay-gibson-adult-children-telegram.jpg" alt="Обложка книги Линдси К. Гибсон «Взрослые дети эмоционально незрелых родителей»" class="example-book-cover">
-                        <div class="example-book-title">Тема месяца: что мы продолжаем нести во взрослую жизнь</div>
+                        <img src="assets/book-covers/ester-perel-pravo-na-levo-telegram.jpg" alt="Обложка книги Эстер Перель «Право на „лево“»" class="example-book-cover">
+                        <div class="example-book-title">Тема месяца: что измена обнаруживает в отношениях</div>
                     </div>
                     <div class="example-field">
                         <div class="example-field-label">Вопросы месяца</div>
                         <div class="example-field-value">
-                            1. Где я раньше замечаю состояние другого человека, чем своё?<br>
-                            2. Где я не жду взаимности — потому что привыкла обходиться без неё?<br>
-                            3. Где беру на себя чужую ответственность или сомневаюсь в праве на собственные чувства?
+                            1. Что именно мы называем верностью: действие, честность, договор или принадлежность?<br>
+                            2. Что измена разрушает сильнее — связь, доверие, образ себя или ощущение общей реальности?<br>
+                            3. Какие ожидания мы возлагаем на одного человека — и что происходит, когда он не может вместить их все?
                         </div>
                     </div>
                     <div class="example-field">
                         <div class="example-field-label">Практический фокус</div>
-                        <div class="example-field-value">Будем работать с упражнениями из книги и различать: что в наших отношениях действительно происходит сейчас, а что мы по привычке достраиваем из старого опыта.</div>
+                        <div class="example-field-value">Будем замечать собственные автоматические приговоры и пробовать удерживать сложность: последствия поступка, контекст отношений, желание, боль и разные версии одной истории.</div>
                     </div>
                     <div class="example-field">
                         <div class="example-field-label">Вброс в чат</div>
-                        <div class="example-field-value prompt">Назови один способ быть в отношениях, который когда-то помогал тебе сохранять контакт, а теперь мешает близости.</div>
+                        <div class="example-field-value prompt">Какая идея о верности кажется тебе очевидной — и что меняется, если поставить её под вопрос?</div>
                     </div>
                     <div class="example-field">
-                        <div class="example-field-value takeaway">Нас интересует не поиск виноватых, а возвращение себе выбора там, где раньше работал автоматический способ выживания.</div>
+                        <div class="example-field-value takeaway">Разговор об измене — это не только разговор о третьем человеке, но и о том, чего мы ждём от любви, брака и самих себя.</div>
                     </div>
                 </div>
                 <div class="example-card reveal reveal-delay-2">
@@ -2461,10 +2490,14 @@
                     </div>
                     <div class="example-field">
                         <div class="example-field-label">Дата встречи</div>
-                        <div class="example-field-value prompt">Воскресенье, 25 октября · 18:00 по Лондону</div>
+                        <div class="example-field-value prompt">Воскресенье, 29 ноября · 18:00–19:30 по Лондону</div>
                     </div>
                     <div class="example-field">
                         <div class="example-field-value takeaway">Можно прийти не с готовым выводом, а с местом, где книга задела, разозлила или изменила вопрос.</div>
+                    </div>
+                    <div class="meeting-actions" aria-label="Ссылки встречи">
+                        <a class="meeting-link" href="https://us06web.zoom.us/j/89546786545?pwd=le32e3C1SRT0hkLU50Qw2EYPT0tJKo.1" target="_blank" rel="noopener">Подключиться к Zoom</a>
+                        <a class="meeting-link" href="https://calget.com/ip0j8qko" target="_blank" rel="noopener">Добавить в календарь</a>
                     </div>
                 </div>
             </div>
@@ -2479,20 +2512,9 @@
                 <p class="reading-list-intro reveal">Одна общая книга в месяц. План задаёт направление, а актуальная книга всегда отмечена отдельно.</p>
             </div>
             <ol class="reading-list">
-                <li class="reading-list-item is-current reveal">
+                <li class="reading-list-item is-current reveal reveal-delay-1">
                     <div class="reading-cover-frame">
-                        <img class="reading-cover" src="assets/book-covers/lindsay-gibson-adult-children-telegram.jpg" alt="Обложка книги Линдси К. Гибсон «Взрослые дети эмоционально незрелых родителей»" loading="lazy">
-                    </div>
-                    <div class="reading-copy">
-                        <span class="reading-month">Октябрь</span>
-                        <span class="reading-title">«Взрослые дети эмоционально незрелых родителей»</span>
-                        <span class="reading-author">Линдси К. Гибсон</span>
-                        <span class="reading-note">О том, как эмоциональная недоступность родителей продолжает влиять на взрослых детей: через одиночество, сверхответственность и сомнение в себе. Книга помогает распознать эти паттерны, выстроить границы и вернуть себе право на взаимные отношения.</span>
-                    </div>
-                </li>
-                <li class="reading-list-item reveal reveal-delay-1">
-                    <div class="reading-cover-frame">
-                        <img class="reading-cover" src="assets/book-covers/ester-perel-pravo-na-levo.png" alt="Обложка книги Эстер Перель «Право на „лево“»" loading="lazy">
+                        <img class="reading-cover" src="assets/book-covers/ester-perel-pravo-na-levo-telegram.jpg" alt="Обложка книги Эстер Перель «Право на „лево“»" loading="lazy">
                     </div>
                     <div class="reading-copy">
                         <span class="reading-month">Ноябрь</span>
@@ -2543,6 +2565,17 @@
                         <span class="reading-title">«Одинокая Chanel»</span>
                         <span class="reading-author">Клод Делэ</span>
                         <span class="reading-note">Интимный портрет Коко Шанель от Клод Делэ — её близкой подруги и психоаналитика в последние десять лет жизни. Не история модного дома, а история женщины: её страстей и потерь, блеска и уязвимости, творческой силы и одиночества.</span>
+                    </div>
+                </li>
+                <li class="reading-list-item reveal">
+                    <div class="reading-cover-frame">
+                        <img class="reading-cover" src="assets/book-covers/einat-nathan-smysl-moei-zhizni.png" alt="Обложка книги Эйнат Натан «Смысл моей жизни»" loading="lazy">
+                    </div>
+                    <div class="reading-copy">
+                        <span class="reading-month">Апрель</span>
+                        <span class="reading-title">«Смысл моей жизни. Каким родителем я хочу быть и каких детей хочу воспитать»</span>
+                        <span class="reading-author">Эйнат Натан</span>
+                        <span class="reading-note">Тёплый и честный разговор о родительстве без требования быть идеальными. О том, как видеть в ребёнке отдельного человека, выдерживать хаос и собственное несовершенство, слышать потребности детей и не исчезать из собственной жизни.</span>
                     </div>
                 </li>
             </ol>
@@ -2635,6 +2668,19 @@
                         <li>Стремление оставить наследие столкнулось с другой ценностью: не наследить, не переложить на других свой груз.</li>
                     </ul>
                     <p class="archive-takeaway">Что важнее: оставить след или не наследить?</p>
+                </article>
+
+                <article class="archive-card reveal" data-number="05">
+                    <div class="archive-book">
+                        <img src="assets/book-covers/lindsay-gibson-adult-children-telegram.jpg" alt="Обложка книги Линдси К. Гибсон «Взрослые дети эмоционально незрелых родителей»" class="archive-cover" loading="lazy">
+                        <div>
+                            <span class="archive-month">Октябрь 2026</span>
+                            <h3 class="archive-title">«Взрослые дети эмоционально незрелых родителей»</h3>
+                            <p class="archive-author">Линдси К. Гибсон</p>
+                        </div>
+                    </div>
+                    <p class="archive-label">Книга октября</p>
+                    <p class="archive-summary">Финальная встреча по книге перенесена на 1 ноября. Итоговая фиксация разговора появится здесь после встречи.</p>
                 </article>
             </div>
         </div>
