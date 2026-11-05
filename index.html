@@ -1,0 +1,2816 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Трансформационное чтение — Лена Дегтярь и Юлия Воронина</title>
+    <meta name="description" content="Книжный клуб Лены Дегтярь и Юлии Ворониной. В ноябре читаем Эстер Перель «Право на „лево“» и исследуем желание, верность, тайну и устройство современных отношений.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --parchment: #FAF7F0;
+            --parchment-warm: #F5EDE0;
+            --parchment-cool: #EDF3F0;
+            --teal-deep: #2A6B7C;
+            --teal-mid: #3D8B8B;
+            --teal-light: #7BB8B5;
+            --teal-wash: #B8D4DB;
+            --teal-whisper: #E8F2F0;
+            --navy: #1E3A5F;
+            --navy-soft: #2B4A73;
+            --gold: #C4A265;
+            --gold-light: #D4BC8A;
+            --gold-dark: #8B7355;
+            --sage: #4A6B5A;
+            --sage-light: #7A9B8A;
+            --text: #2C2A26;
+            --text-soft: #5A5650;
+            --text-faded: #8A8578;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Lora', Georgia, serif;
+            background: var(--parchment);
+            color: var(--text);
+            line-height: 1.8;
+            font-size: 17px;
+            overflow-x: hidden;
+        }
+
+        /* --- Texture overlay for paper feel --- */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 256px;
+            opacity: 0.35;
+        }
+
+        /* --- Typography --- */
+        h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 900;
+            line-height: 1.1;
+        }
+
+        h2 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 600;
+            line-height: 1.2;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--navy);
+        }
+
+        h3 {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-weight: 600;
+            line-height: 1.3;
+            font-size: 1.5rem;
+        }
+
+        /* --- Layout --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        /* --- Sacred geometry decorative SVGs --- */
+        .mandala-divider {
+            display: block;
+            margin: 0 auto;
+            width: 60px;
+            height: 60px;
+            opacity: 0.2;
+        }
+
+        .lotus-divider {
+            display: block;
+            margin: 40px auto;
+            width: 120px;
+            height: 40px;
+        }
+
+        /* --- Nav dots --- */
+        .nav-dots {
+            position: fixed;
+            right: 28px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .nav-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--gold-light);
+            border: 1px solid var(--gold);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            opacity: 0.4;
+        }
+
+        .nav-dot:hover, .nav-dot.active {
+            background: var(--gold);
+            transform: scale(1.5);
+            opacity: 1;
+            box-shadow: 0 0 10px rgba(196, 162, 101, 0.3);
+        }
+
+        /* ============================
+           SECTION PHOTOS (shared)
+           ============================ */
+        .section-photo {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 12px 40px rgba(30, 58, 95, 0.08), 0 2px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .section-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Placeholder state when no image loaded yet */
+        .section-photo-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 12px;
+            background: linear-gradient(145deg, var(--parchment-warm) 0%, var(--teal-whisper) 50%, var(--parchment-cool) 100%);
+            color: var(--text-faded);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+        }
+
+        .section-photo-placeholder svg {
+            width: 48px;
+            height: 48px;
+            stroke: var(--teal-light);
+            stroke-width: 1;
+            fill: none;
+            opacity: 0.5;
+        }
+
+        /* ============================
+           HERO
+           ============================ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 60px clamp(24px, 5vw, 84px);
+            position: relative;
+            overflow: hidden;
+            /* Background image — замени hero-bg.jpg на свою фотографию */
+            background: var(--parchment);
+        }
+
+        /* Hero with background photo */
+        .hero.has-bg-image {
+            background-size: cover;
+            background-position: center;
+            /* Set your image: background-image: url('hero-bg.jpg'); */
+        }
+
+        /* Warm overlay on top of background image */
+        .hero.has-bg-image::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(250, 247, 240, 0.7) 0%,
+                rgba(250, 247, 240, 0.55) 40%,
+                rgba(250, 247, 240, 0.75) 100%
+            );
+            z-index: 1;
+        }
+
+        /* Fallback watercolor blobs when no background image */
+        .hero:not(.has-bg-image)::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            top: -100px;
+            right: -150px;
+            background: radial-gradient(ellipse, rgba(42, 107, 124, 0.08) 0%, rgba(61, 139, 139, 0.04) 40%, transparent 70%);
+            border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
+            animation: morph 25s ease-in-out infinite;
+        }
+
+        .hero:not(.has-bg-image)::after {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            bottom: -80px;
+            left: -120px;
+            background: radial-gradient(ellipse, rgba(74, 107, 90, 0.07) 0%, rgba(196, 162, 101, 0.04) 40%, transparent 70%);
+            border-radius: 45% 55% 40% 60% / 55% 45% 60% 40%;
+            animation: morph 20s ease-in-out infinite reverse;
+        }
+
+        .hero:not(.has-bg-image) {
+            background:
+                radial-gradient(ellipse at 20% 15%, rgba(184, 212, 219, 0.3) 0%, transparent 45%),
+                radial-gradient(ellipse at 80% 80%, rgba(42, 107, 124, 0.08) 0%, transparent 40%),
+                radial-gradient(ellipse at 50% 50%, rgba(196, 162, 101, 0.08) 0%, transparent 55%),
+                radial-gradient(ellipse at 60% 30%, rgba(245, 237, 224, 0.6) 0%, transparent 50%),
+                var(--parchment);
+        }
+
+        @keyframes morph {
+            0%, 100% { border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%; transform: rotate(0deg) scale(1); }
+            33% { border-radius: 45% 55% 50% 50% / 60% 40% 55% 45%; transform: rotate(3deg) scale(1.05); }
+            66% { border-radius: 55% 45% 40% 60% / 45% 55% 50% 50%; transform: rotate(-2deg) scale(0.98); }
+        }
+
+        /* Sacred geometry background mandala (fallback) */
+        .hero-mandala {
+            position: absolute;
+            width: 650px;
+            height: 650px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.03;
+            animation: slowspin 120s linear infinite;
+        }
+
+        .hero.has-bg-image .hero-mandala { display: none; }
+
+        @keyframes slowspin {
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 1280px;
+            min-width: 0;
+        }
+
+        .hero-logo {
+            display: block;
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin: 0 auto 32px;
+            box-shadow: 0 8px 40px rgba(42, 107, 124, 0.12);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 28px;
+            border: 1px solid rgba(196, 162, 101, 0.4);
+            color: var(--gold-dark);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 36px;
+            background: rgba(250, 247, 240, 0.5);
+            backdrop-filter: blur(6px);
+        }
+
+        .hero h1 {
+            font-size: clamp(3.2rem, 7vw, 5.5rem);
+            color: var(--navy);
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-book-hero h1 {
+            font-size: clamp(3rem, 4.6vw, 4.35rem);
+            line-height: 0.98;
+            margin-bottom: 28px;
+            max-width: 7.8em;
+            overflow-wrap: normal;
+        }
+
+        .hero-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(420px, 0.72fr);
+            gap: clamp(40px, 5vw, 78px);
+            align-items: center;
+            text-align: left;
+        }
+
+        .hero-copy {
+            max-width: min(680px, 100%);
+            min-width: 0;
+        }
+
+        .hero-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5em;
+            font-weight: 400;
+            font-style: italic;
+            color: var(--teal-deep);
+            margin-bottom: 44px;
+            letter-spacing: 0.03em;
+            opacity: 0.9;
+        }
+
+        .hero-book-hero .hero-subtitle {
+            max-width: 600px;
+            margin: 0 0 34px;
+            font-family: 'Lora', Georgia, serif;
+            font-size: clamp(1.08rem, 1.8vw, 1.32rem);
+            font-style: normal;
+            line-height: 1.78;
+            color: var(--text-soft);
+        }
+
+        .hero-spotlight {
+            width: 100%;
+            min-width: 0;
+            padding: 44px 42px 52px;
+            display: grid;
+            grid-template-columns: 150px minmax(0, 1fr);
+            gap: 34px;
+            align-items: start;
+            text-align: left;
+            position: relative;
+            background:
+                linear-gradient(90deg, rgba(42, 107, 124, 0.58), rgba(196, 162, 101, 0.58)) top / 100% 3px no-repeat,
+                rgba(250, 247, 240, 0.76);
+            border: 1px solid rgba(196, 162, 101, 0.18);
+            box-shadow: 0 26px 80px rgba(30, 58, 95, 0.11);
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-spotlight::after {
+            content: '';
+            position: absolute;
+            left: 42px;
+            right: 42px;
+            bottom: 34px;
+            height: 1px;
+            background: linear-gradient(to right, rgba(196, 162, 101, 0.24), rgba(42, 107, 124, 0.14), transparent);
+        }
+
+        .hero-book-cover {
+            width: 148px;
+            aspect-ratio: 2 / 3;
+            object-fit: cover;
+            border-radius: 4px 9px 9px 4px;
+            box-shadow:
+                -7px 8px 0 rgba(196, 162, 101, 0.2),
+                0 22px 42px rgba(30, 58, 95, 0.22);
+            transform: rotate(-1.4deg);
+        }
+
+        .hero-theme-label {
+            display: block;
+            margin-bottom: 14px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.82em;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+        }
+
+        .hero-theme-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.85rem, 3.2vw, 2.65rem);
+            font-weight: 700;
+            line-height: 1.22;
+            color: var(--navy);
+            margin-bottom: 18px;
+        }
+
+        .hero-theme-note {
+            max-width: 570px;
+            color: var(--text-soft);
+            line-height: 1.7;
+        }
+
+        .hero-format-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 0 0 34px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .hero-format-strip li {
+            padding: 7px 13px;
+            border: 1px solid rgba(196, 162, 101, 0.22);
+            background: rgba(250, 247, 240, 0.52);
+            color: var(--gold-dark);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.88em;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 0;
+        }
+
+        .hero-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 42px;
+            padding: 10px 20px;
+            border: 1px solid rgba(42, 107, 124, 0.22);
+            color: var(--teal-deep);
+            text-decoration: none;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95em;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+        }
+
+        .hero-link.primary {
+            background: var(--teal-deep);
+            border-color: var(--teal-deep);
+            color: var(--parchment);
+        }
+
+        .hero-link:hover {
+            transform: translateY(-2px);
+            background: rgba(42, 107, 124, 0.08);
+        }
+
+        .hero-link.primary:hover {
+            background: var(--navy);
+            color: var(--parchment);
+        }
+
+        .hero-quote {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 1.05em;
+            color: var(--text-soft);
+            max-width: 520px;
+            margin: 0 auto;
+            padding: 28px 32px;
+            position: relative;
+            border: none;
+            background: none;
+        }
+
+        .hero-quote::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10%;
+            bottom: 10%;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--gold-light), var(--teal-light), transparent);
+            opacity: 0.7;
+        }
+
+        .hero-authors-line {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1em;
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: var(--gold-dark);
+            margin-bottom: 28px;
+        }
+
+        .hero-mantra {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15em;
+            font-style: italic;
+            color: var(--teal-deep);
+            margin-top: 32px;
+            letter-spacing: 0.02em;
+        }
+
+        .hero-brand {
+            margin-top: 60px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.8em;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-faded);
+        }
+
+        /* ============================
+           AUTHORS SECTION
+           ============================ */
+        .authors-section {
+            background:
+                radial-gradient(ellipse at 25% 40%, rgba(196, 162, 101, 0.07) 0%, transparent 45%),
+                radial-gradient(ellipse at 75% 60%, rgba(42, 107, 124, 0.04) 0%, transparent 40%),
+                radial-gradient(ellipse at 50% 90%, rgba(245, 237, 224, 0.5) 0%, transparent 40%),
+                var(--parchment-warm);
+        }
+
+        .authors-section .section-header {
+            text-align: center;
+            margin-bottom: 72px;
+        }
+
+        .authors-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .author-card {
+            text-align: center;
+            padding: 48px 36px;
+            background: rgba(250, 247, 240, 0.65);
+            border: 1px solid rgba(196, 162, 101, 0.08);
+            backdrop-filter: blur(4px);
+            box-shadow: 0 2px 16px rgba(30, 58, 95, 0.03);
+            transition: box-shadow 0.4s ease, border-color 0.4s ease;
+        }
+
+        .author-card:hover {
+            border-color: rgba(196, 162, 101, 0.2);
+            box-shadow: 0 8px 32px rgba(42, 107, 124, 0.06);
+        }
+
+        .author-photo {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            margin: 0 auto 28px;
+            overflow: hidden;
+            border: 2px solid var(--gold-light);
+            box-shadow: 0 0 40px rgba(196, 162, 101, 0.15);
+            position: relative;
+            background: linear-gradient(135deg, var(--teal-whisper) 0%, var(--parchment-warm) 100%);
+        }
+
+        .author-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Placeholder initials when no photo */
+        .author-photo .initials {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--teal-deep);
+            opacity: 0.5;
+        }
+
+        .author-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 12px;
+        }
+
+        .author-roles {
+            font-family: 'Lora', serif;
+            font-size: 0.88em;
+            color: var(--gold-dark);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .author-roles span {
+            display: inline-block;
+            padding: 2px 10px;
+            margin: 3px 2px;
+            border: 1px solid rgba(196, 162, 101, 0.2);
+            font-size: 0.95em;
+        }
+
+        .author-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.05em;
+            color: var(--text-soft);
+            line-height: 1.6;
+            padding: 20px;
+            position: relative;
+            margin-top: 8px;
+            border-top: 1px solid rgba(196, 162, 101, 0.12);
+        }
+
+        .author-quote::before {
+            content: '\201C';
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5em;
+            color: var(--gold-light);
+            position: absolute;
+            top: 8px;
+            left: 4px;
+            line-height: 1;
+        }
+
+        .author-quote p {
+            padding-left: 24px;
+        }
+
+        @media (max-width: 960px) {
+            .authors-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+        }
+
+        /* ============================
+           SECTION DIVIDERS
+           ============================ */
+        .section-ornament {
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        .section-ornament::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--gold-light), transparent);
+        }
+
+        /* ============================
+           ЗНАКОМО? SECTION
+           ============================ */
+        .pain-section {
+            background:
+                radial-gradient(ellipse at 0% 50%, rgba(184, 212, 219, 0.2) 0%, transparent 50%),
+                var(--parchment-warm);
+        }
+
+        .pain-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .pain-visual {
+            position: relative;
+            height: 420px;
+        }
+
+        .pain-content h2 {
+            margin-bottom: 40px;
+        }
+
+        .pain-list {
+            list-style: none;
+        }
+
+        .pain-list li {
+            padding: 16px 0 16px 36px;
+            position: relative;
+            border-bottom: 1px solid rgba(196, 162, 101, 0.15);
+            color: var(--text-soft);
+            font-size: 1.02em;
+        }
+
+        .pain-list li:last-child { border-bottom: none; }
+
+        .pain-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 22px;
+            width: 16px;
+            height: 16px;
+            border: 1.5px solid var(--teal-light);
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(123, 184, 181, 0.2), transparent);
+        }
+
+        /* ============================
+           INTEGRATION SECTION
+           ============================ */
+        .integration-section {
+            background:
+                radial-gradient(ellipse at 100% 0%, rgba(196, 162, 101, 0.08) 0%, transparent 40%),
+                var(--parchment);
+            text-align: center;
+        }
+
+        .integration-section h2 {
+            margin-bottom: 16px;
+        }
+
+        .integration-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-top: 60px;
+            align-items: center;
+        }
+
+        .integration-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .integration-list li {
+            padding: 18px 0 18px 40px;
+            position: relative;
+            font-size: 1.05em;
+            color: var(--text-soft);
+            border-bottom: 1px solid rgba(196, 162, 101, 0.12);
+        }
+
+        .integration-list li:last-child { border-bottom: none; }
+
+        .integration-list li::before {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 24px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid var(--gold);
+            border-top: 5px solid transparent;
+            border-bottom: 5px solid transparent;
+        }
+
+        .integration-visual {
+            height: 380px;
+        }
+
+        .integration-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5em;
+            font-style: italic;
+            font-weight: 400;
+            color: var(--teal-deep);
+            line-height: 1.5;
+            padding: 40px;
+            position: relative;
+            background:
+                radial-gradient(ellipse at center, rgba(42, 107, 124, 0.04) 0%, transparent 70%);
+        }
+
+        .integration-quote::before,
+        .integration-quote::after {
+            font-family: 'Playfair Display', serif;
+            font-size: 4em;
+            color: var(--gold-light);
+            position: absolute;
+            line-height: 1;
+        }
+
+        .integration-quote::before { content: '\201C'; top: 0; left: 10px; }
+        .integration-quote::after { content: '\201D'; bottom: -20px; right: 10px; }
+
+        /* ============================
+           SIX-MONTH READING LIST
+           ============================ */
+        .reading-list-section {
+            background:
+                radial-gradient(ellipse at 12% 20%, rgba(196, 162, 101, 0.1) 0%, transparent 36%),
+                radial-gradient(ellipse at 88% 78%, rgba(42, 107, 124, 0.08) 0%, transparent 38%),
+                var(--parchment-warm);
+            overflow: hidden;
+        }
+
+        .reading-list-section .section-header {
+            max-width: 720px;
+            margin: 0 auto 64px;
+            text-align: center;
+        }
+
+        .reading-list-intro {
+            max-width: 620px;
+            margin: 18px auto 0;
+            color: var(--text-soft);
+        }
+
+        .reading-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1px;
+            max-width: 960px;
+            margin: 0 auto;
+            background: rgba(196, 162, 101, 0.22);
+            border: 1px solid rgba(196, 162, 101, 0.22);
+            box-shadow: 0 24px 70px rgba(30, 58, 95, 0.07);
+        }
+
+        .reading-list-item {
+            min-height: 224px;
+            padding: 34px 36px 32px;
+            position: relative;
+            background: rgba(250, 247, 240, 0.94);
+            display: grid;
+            grid-template-columns: 112px minmax(0, 1fr);
+            gap: 28px;
+            align-items: start;
+            transition: background 0.35s ease, transform 0.35s ease;
+        }
+
+        .reading-list-item:hover {
+            background: var(--parchment);
+            transform: translateY(-3px);
+            z-index: 1;
+        }
+
+        .reading-list-item.is-current {
+            background:
+                linear-gradient(135deg, rgba(232, 242, 240, 0.96), rgba(250, 247, 240, 0.96));
+        }
+
+        .reading-list-item.is-current .reading-month {
+            color: var(--teal-deep);
+        }
+
+        .reading-list-item.is-current .reading-month::after {
+            content: 'сейчас';
+            margin-left: 10px;
+            padding: 3px 8px;
+            border: 1px solid rgba(42, 107, 124, 0.24);
+            border-radius: 999px;
+            font-size: 0.82em;
+            letter-spacing: 0.12em;
+        }
+
+        .reading-list-item::after {
+            content: '';
+            position: absolute;
+            left: 36px;
+            bottom: 24px;
+            width: 44px;
+            height: 1px;
+            background: linear-gradient(to right, var(--gold), transparent);
+        }
+
+        .reading-cover-frame {
+            width: 112px;
+            aspect-ratio: 2 / 3;
+            overflow: hidden;
+            border-radius: 3px 7px 7px 3px;
+            background: var(--paper, #fffdf7);
+            border: 1px solid rgba(30, 58, 95, 0.12);
+            box-shadow:
+                -4px 5px 0 rgba(196, 162, 101, 0.18),
+                0 16px 28px rgba(30, 58, 95, 0.16);
+            transform: rotate(-1.2deg);
+            transform-origin: center bottom;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+
+        .reading-list-item:nth-child(even) .reading-cover-frame {
+            transform: rotate(1.2deg);
+        }
+
+        .reading-list-item:hover .reading-cover-frame {
+            transform: rotate(0) translateY(-3px) scale(1.02);
+            box-shadow:
+                -3px 4px 0 rgba(196, 162, 101, 0.2),
+                0 20px 34px rgba(30, 58, 95, 0.2);
+        }
+
+        .reading-cover {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: contain;
+        }
+
+        .reading-cover.chanel-cover {
+            transform: scale(1.78);
+            transform-origin: center;
+        }
+
+        .reading-copy {
+            min-width: 0;
+            padding-top: 4px;
+        }
+
+        .reading-month {
+            display: block;
+            margin-bottom: 18px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.78em;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+        }
+
+        .reading-title {
+            display: block;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.4rem, 2.4vw, 1.8rem);
+            font-weight: 600;
+            line-height: 1.22;
+            color: var(--navy);
+        }
+
+        .reading-author {
+            display: block;
+            margin-top: 10px;
+            color: var(--teal-deep);
+            font-size: 0.92em;
+        }
+
+        .reading-note {
+            display: block;
+            margin-top: 18px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(196, 162, 101, 0.16);
+            color: var(--text-soft);
+            font-size: 0.82em;
+            line-height: 1.65;
+        }
+
+        /* ============================
+           READ BOOKS ARCHIVE
+           ============================ */
+        .archive-section {
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 9% 16%, rgba(196, 162, 101, 0.1), transparent 28%),
+                radial-gradient(circle at 90% 82%, rgba(123, 184, 181, 0.1), transparent 30%),
+                var(--parchment);
+        }
+
+        .archive-heading {
+            display: grid;
+            grid-template-columns: minmax(0, 0.72fr) minmax(320px, 1fr);
+            gap: 64px;
+            align-items: end;
+            margin-bottom: 64px;
+        }
+
+        .archive-kicker {
+            display: block;
+            margin-bottom: 14px;
+            color: var(--gold-dark);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.82em;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .archive-intro {
+            max-width: 620px;
+            color: var(--text-soft);
+        }
+
+        .archive-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 28px;
+        }
+
+        .archive-card {
+            min-width: 0;
+            padding: 42px;
+            position: relative;
+            overflow: hidden;
+            background: rgba(245, 237, 224, 0.68);
+            border: 1px solid rgba(196, 162, 101, 0.16);
+            box-shadow: 0 24px 64px rgba(30, 58, 95, 0.07);
+        }
+
+        .archive-card:nth-child(2) {
+            background: rgba(232, 242, 240, 0.68);
+            border-color: rgba(42, 107, 124, 0.13);
+        }
+
+        .archive-card::before {
+            content: attr(data-number);
+            position: absolute;
+            top: -42px;
+            right: 18px;
+            font-family: 'Playfair Display', serif;
+            font-size: 10rem;
+            font-weight: 900;
+            line-height: 1;
+            color: rgba(196, 162, 101, 0.08);
+            pointer-events: none;
+        }
+
+        .archive-card:nth-child(2)::before {
+            color: rgba(42, 107, 124, 0.07);
+        }
+
+        .archive-book {
+            display: grid;
+            grid-template-columns: 94px minmax(0, 1fr);
+            gap: 24px;
+            align-items: start;
+            margin-bottom: 34px;
+            position: relative;
+        }
+
+        .archive-cover {
+            width: 94px;
+            aspect-ratio: 2 / 3;
+            object-fit: cover;
+            border-radius: 3px 7px 7px 3px;
+            box-shadow:
+                -4px 5px 0 rgba(196, 162, 101, 0.18),
+                0 16px 30px rgba(30, 58, 95, 0.16);
+        }
+
+        .archive-month {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--gold-dark);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.76em;
+            font-weight: 600;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        .archive-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.45rem, 2.5vw, 2rem);
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--navy);
+        }
+
+        .archive-author {
+            margin-top: 8px;
+            color: var(--teal-deep);
+            font-size: 0.9em;
+        }
+
+        .archive-label {
+            margin-bottom: 12px;
+            color: var(--teal-deep);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.78em;
+            font-weight: 600;
+            letter-spacing: 0.17em;
+            text-transform: uppercase;
+        }
+
+        .archive-summary {
+            position: relative;
+            color: var(--text-soft);
+            line-height: 1.75;
+        }
+
+        .archive-points {
+            display: grid;
+            gap: 12px;
+            margin-top: 24px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .archive-points li {
+            padding-left: 22px;
+            position: relative;
+            color: var(--text-soft);
+            font-size: 0.91em;
+            line-height: 1.65;
+        }
+
+        .archive-points li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--gold);
+        }
+
+        .archive-takeaway {
+            margin-top: 30px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(196, 162, 101, 0.18);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2em;
+            font-style: italic;
+            line-height: 1.5;
+            color: var(--navy);
+        }
+
+        /* ============================
+           BENEFITS
+           ============================ */
+        .benefits-section {
+            background:
+                radial-gradient(ellipse at 100% 50%, rgba(42, 107, 124, 0.06) 0%, transparent 40%),
+                var(--parchment-warm);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .benefits-list {
+            list-style: none;
+        }
+
+        .benefits-list li {
+            padding: 18px 0 18px 48px;
+            position: relative;
+            color: var(--text-soft);
+            border-bottom: 1px solid rgba(196, 162, 101, 0.12);
+        }
+
+        .benefits-list li:last-child { border-bottom: none; }
+
+        .benefits-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 28px;
+            height: 28px;
+            background: radial-gradient(circle, var(--gold-light) 20%, rgba(196, 162, 101, 0.1) 60%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .benefits-list li::after {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            border-radius: 50%;
+        }
+
+        .benefits-visual {
+            position: relative;
+            height: 400px;
+        }
+
+        /* ============================
+           AUDIENCE SECTION
+           ============================ */
+        .audience-section {
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(184, 212, 219, 0.2) 0%, transparent 50%),
+                var(--parchment);
+        }
+
+        .audience-section .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .audience-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .audience-card {
+            padding: 44px;
+            position: relative;
+            overflow: hidden;
+            background: rgba(250, 247, 240, 0.65);
+            border: 1px solid rgba(196, 162, 101, 0.08);
+            backdrop-filter: blur(4px);
+            box-shadow: 0 2px 12px rgba(30, 58, 95, 0.03);
+        }
+
+        .audience-card.yes { border-top: 2px solid var(--teal-mid); }
+        .audience-card.no { border-top: 2px solid var(--gold); }
+
+        .audience-card h3 {
+            color: var(--navy);
+            margin-bottom: 28px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .audience-card h3 svg {
+            width: 24px;
+            height: 24px;
+            stroke-width: 2.5;
+            fill: none;
+            flex-shrink: 0;
+        }
+
+        .audience-card.yes h3 svg { stroke: var(--teal-mid); }
+        .audience-card.no h3 svg { stroke: var(--gold); }
+
+        .audience-list {
+            list-style: none;
+        }
+
+        .audience-list li {
+            padding: 12px 0;
+            padding-left: 24px;
+            position: relative;
+            color: var(--text-soft);
+            border-bottom: 1px solid rgba(196, 162, 101, 0.08);
+        }
+
+        .audience-list li:last-child { border-bottom: none; }
+
+        .audience-card.yes .audience-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 18px;
+            width: 8px;
+            height: 8px;
+            background: var(--teal-light);
+            border-radius: 50%;
+        }
+
+        .audience-card.no .audience-list li::before {
+            content: '';
+            position: absolute;
+            left: 1px;
+            top: 18px;
+            width: 6px;
+            height: 6px;
+            border: 1.5px solid var(--gold);
+            border-radius: 1px;
+            transform: rotate(45deg);
+        }
+
+        /* ============================
+           PRICING
+           ============================ */
+        .pricing-section {
+            background:
+                linear-gradient(145deg,
+                    #1C3352 0%,
+                    #1E3A5F 25%,
+                    #1F4A6B 50%,
+                    var(--teal-deep) 80%,
+                    #2B6B78 100%
+                );
+            color: var(--parchment);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Watercolor texture over dark bg */
+        .pricing-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 15% 25%, rgba(196, 162, 101, 0.1) 0%, transparent 45%),
+                radial-gradient(ellipse at 85% 75%, rgba(123, 184, 181, 0.08) 0%, transparent 45%),
+                radial-gradient(ellipse at 50% 50%, rgba(42, 107, 124, 0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Background mandala in pricing */
+        .pricing-section .bg-mandala {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.03;
+        }
+
+        .pricing-section .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .pricing-section .section-header h2 {
+            color: var(--parchment);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .pricing-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(196, 162, 101, 0.12);
+            padding: 44px 28px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.5s ease;
+        }
+
+        .pricing-card:hover {
+            border-color: rgba(196, 162, 101, 0.4);
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-3px);
+        }
+
+        .pricing-card.featured {
+            border-color: rgba(196, 162, 101, 0.35);
+            background: rgba(196, 162, 101, 0.06);
+            transform: scale(1.03);
+            box-shadow: 0 0 50px rgba(196, 162, 101, 0.08);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.03) translateY(-3px);
+        }
+
+        .pricing-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9em;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            margin-bottom: 20px;
+        }
+
+        .pricing-amount {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: var(--parchment);
+            margin-bottom: 8px;
+        }
+
+        .pricing-note {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            color: rgba(250, 247, 240, 0.5);
+            font-size: 1em;
+        }
+
+        .pricing-cta {
+            text-align: center;
+            margin-top: 56px;
+            position: relative;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 18px 56px;
+            background: linear-gradient(135deg, var(--gold) 0%, #B08D50 100%);
+            color: var(--parchment);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2em;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-decoration: none;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 24px rgba(196, 162, 101, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 36px rgba(196, 162, 101, 0.45);
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+        }
+
+        /* ============================
+           FOOTER
+           ============================ */
+        footer {
+            padding: 80px 0 52px;
+            text-align: center;
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(184, 212, 219, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 100%, rgba(245, 237, 224, 0.4) 0%, transparent 40%),
+                var(--parchment);
+        }
+
+        .footer-mantra {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.3em;
+            color: var(--teal-deep);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+
+        .footer-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9em;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-faded);
+            margin-bottom: 8px;
+        }
+
+        footer a {
+            color: var(--teal-deep);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover { color: var(--gold); }
+
+        .footer-email {
+            font-size: 0.9em;
+            color: var(--text-faded);
+        }
+
+        .tg-questions-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 36px;
+            background: linear-gradient(135deg, var(--teal-deep) 0%, var(--teal-mid) 100%);
+            color: var(--parchment);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05em;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 20px rgba(42, 107, 124, 0.25);
+            margin-top: 8px;
+        }
+
+        .tg-questions-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(42, 107, 124, 0.35);
+            background: linear-gradient(135deg, var(--teal-mid) 0%, var(--teal-deep) 100%);
+            color: var(--parchment);
+        }
+
+        .tg-questions-btn svg {
+            flex-shrink: 0;
+        }
+
+        .footer-umbrella {
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(196, 162, 101, 0.15);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.8em;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-faded);
+            opacity: 0.6;
+        }
+
+        /* ============================
+           AI SELLING SECTION
+           ============================ */
+        .ai-section {
+            background:
+                linear-gradient(145deg,
+                    #1C3352 0%,
+                    #1E3A5F 30%,
+                    #1F4A6B 60%,
+                    var(--teal-deep) 100%
+                );
+            color: var(--parchment);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 25% 15%, rgba(196, 162, 101, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 75% 85%, rgba(123, 184, 181, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(42, 107, 124, 0.05) 0%, transparent 40%);
+            pointer-events: none;
+        }
+
+        .ai-section .container { position: relative; }
+
+        .ai-section .section-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .ai-section .section-header h2 {
+            color: var(--parchment);
+        }
+
+        .ai-section .section-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25em;
+            font-style: italic;
+            color: var(--teal-wash);
+            text-align: center;
+            margin-bottom: 56px;
+        }
+
+        .ai-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
+
+        .ai-card {
+            padding: 40px 28px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(196, 162, 101, 0.1);
+            backdrop-filter: blur(8px);
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+
+        .ai-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(196, 162, 101, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .ai-card-icon {
+            width: 52px;
+            height: 52px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ai-card-icon svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--gold-light);
+            stroke-width: 1.5;
+            fill: none;
+        }
+
+        .ai-card h3 {
+            color: var(--parchment);
+            margin-bottom: 12px;
+            font-size: 1.3rem;
+        }
+
+        .ai-card p {
+            color: var(--teal-wash);
+            font-size: 0.95em;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 960px) {
+            .ai-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
+        }
+
+        /* ============================
+           EXAMPLE SHARING SECTION
+           ============================ */
+        .example-section {
+            background:
+                radial-gradient(ellipse at 0% 50%, rgba(184, 212, 219, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 100% 0%, rgba(196, 162, 101, 0.06) 0%, transparent 40%),
+                var(--parchment-warm);
+        }
+
+        .example-section .section-header {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .example-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15em;
+            font-style: italic;
+            color: var(--text-soft);
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .example-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .example-card {
+            padding: 40px;
+            background: rgba(250, 247, 240, 0.7);
+            border: 1px solid rgba(196, 162, 101, 0.1);
+            backdrop-filter: blur(4px);
+            position: relative;
+            box-shadow: 0 2px 16px rgba(30, 58, 95, 0.03);
+        }
+
+        .example-card::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(to right, var(--teal-deep), var(--gold-light));
+            opacity: 0.7;
+        }
+
+        .example-book-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 24px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(196, 162, 101, 0.15);
+        }
+
+        .example-book-cover {
+            width: 72px;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 4px 16px rgba(30, 58, 95, 0.12);
+            flex-shrink: 0;
+        }
+
+        .example-book-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15em;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .example-field {
+            margin-bottom: 16px;
+        }
+
+        .example-field:last-child { margin-bottom: 0; }
+
+        .example-field-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--teal-deep);
+            margin-bottom: 6px;
+        }
+
+        .example-field-value {
+            color: var(--text-soft);
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .example-field-value.prompt {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            padding: 12px 16px;
+            background: rgba(42, 107, 124, 0.04);
+            border-left: 2px solid var(--teal-light);
+            font-size: 0.9em;
+        }
+
+        .example-field-value.takeaway {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1em;
+            font-style: italic;
+            color: var(--navy);
+            padding-top: 12px;
+            border-top: 1px solid rgba(196, 162, 101, 0.12);
+            margin-top: 8px;
+        }
+
+        .meeting-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .meeting-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 42px;
+            padding: 10px 15px;
+            border: 1px solid rgba(42, 107, 124, 0.28);
+            color: var(--teal-deep);
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95em;
+            font-weight: 600;
+            letter-spacing: 0.35px;
+            text-decoration: none;
+            transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+        }
+
+        .meeting-link:hover {
+            background: var(--teal-deep);
+            border-color: var(--teal-deep);
+            color: var(--cream);
+        }
+
+        @media (max-width: 960px) {
+            .example-cards { grid-template-columns: 1fr; max-width: 520px; }
+            .example-book-cover { width: 60px; }
+        }
+
+        /* ============================
+           HOW IT WORKS (4 STEPS)
+           ============================ */
+        .steps-section {
+            background:
+                radial-gradient(ellipse at 50% 100%, rgba(184, 212, 219, 0.15) 0%, transparent 50%),
+                var(--parchment);
+        }
+
+        .steps-section .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            max-width: 960px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Connecting line between steps */
+        .steps-grid::before {
+            content: '';
+            position: absolute;
+            top: 36px;
+            left: 60px;
+            right: 60px;
+            height: 1px;
+            background: linear-gradient(to right, var(--gold-light), var(--teal-light), var(--gold-light));
+            opacity: 0.4;
+        }
+
+        .step-item {
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 68px;
+            height: 68px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: var(--teal-deep);
+            background: var(--parchment);
+            border: 1.5px solid var(--teal-light);
+            position: relative;
+            z-index: 2;
+            transition: all 0.4s ease;
+        }
+
+        .step-item:hover .step-number {
+            background: var(--teal-deep);
+            color: var(--parchment);
+            border-color: var(--teal-deep);
+            box-shadow: 0 6px 20px rgba(42, 107, 124, 0.15);
+        }
+
+        .step-item h3 {
+            color: var(--navy);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .step-item p {
+            color: var(--text-soft);
+            font-size: 0.92em;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 960px) {
+            .steps-grid { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+            .steps-grid::before { display: none; }
+        }
+
+        @media (max-width: 600px) {
+            .steps-grid { grid-template-columns: 1fr; max-width: 360px; }
+        }
+
+        /* ============================
+           RULES SECTION (soft)
+           ============================ */
+        .rules-section {
+            background:
+                radial-gradient(ellipse at 50% 50%, rgba(196, 162, 101, 0.05) 0%, transparent 50%),
+                var(--parchment);
+            padding: 80px 0;
+        }
+
+        .rules-section .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .rules-section .section-header h2 {
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+        }
+
+        .rules-intro {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.15em;
+            font-style: italic;
+            color: var(--text-soft);
+            text-align: center;
+            max-width: 640px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+
+        .rules-list {
+            list-style: none;
+            max-width: 640px;
+            margin: 0 auto;
+        }
+
+        .rules-list li {
+            padding: 14px 0 14px 32px;
+            position: relative;
+            color: var(--text-soft);
+            font-size: 0.95em;
+            border-bottom: 1px solid rgba(196, 162, 101, 0.1);
+        }
+
+        .rules-list li:last-child { border-bottom: none; }
+
+        .rules-list li::before {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 20px;
+            width: 8px;
+            height: 8px;
+            border: 1px solid var(--gold-light);
+            border-radius: 50%;
+        }
+
+        /* ============================
+           HERO ENTRANCE ANIMATION
+           ============================ */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hero-content .hero-logo {
+            animation: fadeIn 1.2s ease both;
+            animation-delay: 0.1s;
+        }
+
+        .hero-content .hero-badge {
+            animation: fadeUp 0.8s ease both;
+            animation-delay: 0.4s;
+        }
+
+        .hero-content .hero-authors-line {
+            animation: fadeUp 0.8s ease both;
+            animation-delay: 0.55s;
+        }
+
+        .hero-content h1 {
+            animation: fadeUp 0.9s ease both;
+            animation-delay: 0.7s;
+        }
+
+        .hero-content .hero-subtitle {
+            animation: fadeUp 0.8s ease both;
+            animation-delay: 0.9s;
+        }
+
+        .hero-content .hero-quote {
+            animation: fadeUp 0.8s ease both;
+            animation-delay: 1.1s;
+        }
+
+        .hero-content .hero-mantra {
+            animation: fadeUp 0.8s ease both;
+            animation-delay: 1.3s;
+        }
+
+        /* ============================
+           SCROLL REVEAL ANIMATIONS
+           ============================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        /* ============================
+           RESPONSIVE
+           ============================ */
+        @media (max-width: 1180px) {
+            .hero {
+                padding-left: 44px;
+                padding-right: 44px;
+            }
+
+            .hero-layout {
+                grid-template-columns: 1fr;
+                gap: 48px;
+                text-align: center;
+            }
+
+            .hero-copy {
+                max-width: 760px;
+                margin: 0 auto;
+            }
+
+            .hero-book-hero h1 {
+                max-width: none;
+            }
+
+            .hero-book-hero .hero-subtitle {
+                max-width: 720px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-format-strip,
+            .hero-actions {
+                justify-content: center;
+            }
+
+            .hero-spotlight {
+                max-width: 720px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 960px) {
+            .pain-grid,
+            .integration-grid,
+            .benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .pain-visual,
+            .benefits-visual,
+            .integration-visual {
+                height: 300px;
+                order: -1;
+            }
+
+            .audience-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .reading-list {
+                grid-template-columns: 1fr;
+                max-width: 620px;
+            }
+
+            .archive-heading {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                max-width: 720px;
+            }
+
+            .archive-grid {
+                grid-template-columns: 1fr;
+                max-width: 720px;
+                margin: 0 auto;
+            }
+
+            .hero-book-hero .hero-subtitle {
+                margin-bottom: 28px;
+            }
+
+            .hero-spotlight {
+                width: 100%;
+                max-width: 620px;
+                grid-template-columns: 118px minmax(0, 1fr);
+                gap: 30px;
+                padding: 42px 40px 54px;
+            }
+
+            .hero-spotlight::after {
+                left: 40px;
+                right: 40px;
+            }
+
+            .hero-book-cover { width: 118px; }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+            }
+
+            .pricing-card.featured {
+                transform: none;
+            }
+
+            .nav-dots { display: none; }
+        }
+
+        @media (max-width: 600px) {
+            section { padding: 80px 0; }
+
+            .hero {
+                min-height: 0;
+                align-items: flex-start;
+                padding-top: 64px;
+                padding-bottom: 64px;
+                padding-left: 28px;
+                padding-right: 28px;
+            }
+
+            .hero h1 { font-size: 2.6rem; }
+
+            .hero-book-hero h1 {
+                font-size: clamp(2rem, 8.2vw, 2.55rem);
+                letter-spacing: -0.015em;
+            }
+
+            .hero-book-hero .hero-subtitle {
+                font-size: 1.05rem;
+                line-height: 1.65;
+                margin-bottom: 26px;
+            }
+
+            .hero-spotlight {
+                max-width: 100%;
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 34px 22px 48px;
+            }
+
+            .hero-book-cover {
+                width: 120px;
+                margin: 0 auto;
+            }
+
+            .hero-theme-note {
+                margin: 0 auto;
+            }
+
+            .hero-actions {
+                width: 100%;
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .hero-format-strip {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .hero-format-strip li,
+            .hero-link {
+                width: 100%;
+                text-align: center;
+            }
+
+            h2 { font-size: 1.8rem; }
+
+            .reading-list-section .section-header { margin-bottom: 42px; }
+
+            .reading-list-item {
+                min-height: 0;
+                padding: 28px 26px 38px;
+                grid-template-columns: 82px minmax(0, 1fr);
+                gap: 18px;
+            }
+
+            .reading-list-item::after { left: 26px; bottom: 22px; }
+
+            .reading-cover-frame { width: 82px; }
+
+            .reading-title { font-size: 1.25rem; }
+
+            .archive-heading {
+                margin-bottom: 42px;
+            }
+
+            .archive-card {
+                padding: 30px 26px 34px;
+            }
+
+            .archive-book {
+                grid-template-columns: 76px minmax(0, 1fr);
+                gap: 18px;
+                margin-bottom: 28px;
+            }
+
+            .archive-cover {
+                width: 76px;
+            }
+
+            .archive-title {
+                font-size: 1.4rem;
+            }
+
+            .pricing-amount { font-size: 2.5rem; }
+
+            .hero-mandala { width: 400px; height: 400px; }
+            .hero-logo { width: 160px; height: 160px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation dots -->
+    <nav class="nav-dots">
+        <button class="nav-dot active" data-section="hero" aria-label="Начало"></button>
+        <button class="nav-dot" data-section="benefits" aria-label="Что происходит в клубе"></button>
+        <button class="nav-dot" data-section="audience" aria-label="Для кого"></button>
+        <button class="nav-dot" data-section="authors" aria-label="Ведущие"></button>
+        <button class="nav-dot" data-section="ai" aria-label="Двойная оптика"></button>
+        <button class="nav-dot" data-section="steps" aria-label="Как это работает"></button>
+        <button class="nav-dot" data-section="example" aria-label="Книга ноября"></button>
+        <button class="nav-dot" data-section="books" aria-label="Что читаем дальше"></button>
+        <button class="nav-dot" data-section="archive" aria-label="Прочитано в клубе"></button>
+        <button class="nav-dot" data-section="pricing" aria-label="Стоимость"></button>
+    </nav>
+
+    <!-- ====== HERO ====== -->
+    <section class="hero" id="hero">
+        <!-- Background sacred geometry mandala -->
+        <svg class="hero-mandala" viewBox="0 0 400 400" fill="none">
+            <circle cx="200" cy="200" r="190" stroke="currentColor" stroke-width="0.5" opacity="0.3"/>
+            <circle cx="200" cy="200" r="150" stroke="currentColor" stroke-width="0.5" opacity="0.25"/>
+            <circle cx="200" cy="200" r="110" stroke="currentColor" stroke-width="0.5" opacity="0.2"/>
+            <circle cx="200" cy="200" r="70" stroke="currentColor" stroke-width="0.5" opacity="0.15"/>
+            <polygon points="200,50 350,280 50,280" stroke="currentColor" stroke-width="0.5" opacity="0.15"/>
+            <polygon points="200,350 50,120 350,120" stroke="currentColor" stroke-width="0.5" opacity="0.15"/>
+        </svg>
+
+        <div class="hero-content hero-book-hero">
+            <div class="hero-layout">
+                <div class="hero-copy">
+                    <span class="hero-badge">Ноябрь · читаем вместе</span>
+                    <p class="hero-authors-line">Лена Дегтярь &amp; Юлия Воронина</p>
+                    <h1>Трансформационное<br>чтение</h1>
+                    <p class="hero-subtitle">Книжный клуб, где каждый месяц одна общая книга становится материалом для разговора, личных вопросов и более точного выбора.</p>
+                    <ul class="hero-format-strip" aria-label="Формат клуба">
+                        <li>Одна книга в месяц</li>
+                        <li>Вопросы в чате</li>
+                        <li>Закрытый звонок</li>
+                    </ul>
+                    <div class="hero-actions">
+                        <a href="https://t.me/booktantra_bot" class="hero-link primary" target="_blank" rel="noopener">Присоединиться</a>
+                        <a href="#example" class="hero-link">Книга ноября</a>
+                    </div>
+                </div>
+                <aside class="hero-spotlight" aria-label="Сейчас читаем">
+                    <img src="assets/book-covers/ester-perel-pravo-na-levo-telegram.jpg" alt="Обложка книги Эстер Перель «Право на „лево“»" class="hero-book-cover">
+                    <div>
+                        <span class="hero-theme-label">Читаем в ноябре</span>
+                        <div class="hero-theme-title">Эстер Перель<br>«Право на „лево“»</div>
+                        <p class="hero-theme-note">Не только о нарушении договора, а о том, что измена обнаруживает в отношениях: желание, тайну, близость, потерю и ожидания, которые мы связываем с современной любовью.</p>
+                    </div>
+                </aside>
+            </div>
+            <p class="hero-brand">Inscape Projects</p>
+        </div>
+    </section>
+
+    <!-- ====== ЧТО ПРОИСХОДИТ В КЛУБЕ ====== -->
+    <section class="benefits-section" id="benefits">
+        <div class="container">
+            <div class="benefits-grid">
+                <div>
+                    <h2 class="reveal">Что происходит в клубе</h2>
+                    <ul class="benefits-list">
+                        <li class="reveal reveal-delay-1">Одна общая книга в месяц</li>
+                        <li class="reveal reveal-delay-2">Коучинговая рамка Лены и Юлии</li>
+                        <li class="reveal reveal-delay-3">Вопросы и провокации два раза в неделю</li>
+                        <li class="reveal reveal-delay-4">Живой чат для откликов, споров и узнаваний</li>
+                        <li class="reveal">Закрытый звонок в конце месяца</li>
+                        <li class="reveal reveal-delay-1">Две оптики ведущих и открытый разговор группы</li>
+                    </ul>
+                </div>
+                <div class="benefits-visual">
+                    <div class="section-photo">
+                        <img src="Photos/notebook-books.jpg" alt="Дневник чтения и книга с кофе">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== ДЛЯ КОГО ====== -->
+    <section class="audience-section" id="audience">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="reveal">Для кого это</h2>
+            </div>
+            <div class="audience-grid">
+                <div class="audience-card yes reveal">
+                    <h3>
+                        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                        Это для тебя, если
+                    </h3>
+                    <ul class="audience-list">
+                        <li>Интересен психологический угол чтения</li>
+                        <li>Хочется нырять глубоко в материал</li>
+                        <li>Читаешь, чтобы что-то с собой делать</li>
+                        <li>Готова регулярно читать и быть в группе</li>
+                        <li>Важны не эрудиция и скорость, а внутренний процесс</li>
+                    </ul>
+                </div>
+                <div class="audience-card no reveal reveal-delay-2">
+                    <h3>
+                        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                        Это не для тебя, если
+                    </h3>
+                    <ul class="audience-list">
+                        <li>Хочется приходить только послушать</li>
+                        <li>Не готова читать выбранную книгу месяца</li>
+                        <li>Нужен литературный разбор приемов, эпохи и контекста</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== АВТОРЫ ПРОЕКТА ====== -->
+    <section class="authors-section" id="authors">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="reveal">Ведущие</h2>
+            </div>
+            <div class="authors-grid">
+                <!-- Лена -->
+                <div class="author-card reveal">
+                    <div class="author-photo">
+                        <img src="Photos/ЛД2.jpg" alt="Лена Дегтярь">
+                    </div>
+                    <h3 class="author-name">Лена Дегтярь</h3>
+                    <div class="author-roles">
+                        <span>PhD</span>
+                        <span>Coach</span>
+                        <span>Игропрактик</span>
+                        <span>Автор курсов «Принятие себя» и «Анатомия эмоций»</span>
+                    </div>
+                    <div class="author-quote">
+                        <p>В этом формате книга становится не объектом разбора, а способом увидеть, где текст задевает живой материал: убеждения, реакции, выборы и отношения.</p>
+                    </div>
+                </div>
+                <!-- Юлия -->
+                <div class="author-card reveal reveal-delay-2">
+                    <div class="author-photo">
+                        <img src="Photos/ЮВ.jpg" alt="Юлия Воронина">
+                    </div>
+                    <h3 class="author-name">Юлия Воронина</h3>
+                    <div class="author-roles">
+                        <span>Executive Coach</span>
+                        <span>Практик телесной осознанности и дыхания</span>
+                        <span>ex-TOP in Tech</span>
+                    </div>
+                    <div class="author-quote">
+                        <p>Мне интересен разговор, где одна книга открывает разные внутренние маршруты. Не один правильный вывод, а несколько оптик, через которые человек точнее видит себя.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== ДВОЙНАЯ ОПТИКА ====== -->
+    <section class="ai-section" id="ai">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="reveal">Двойная авторская оптика</h2>
+            </div>
+            <p class="section-subtitle reveal">Лена и Юлия читают ту же книгу и приносят два независимых взгляда. Не один авторитет, а диалог.</p>
+            <div class="ai-grid">
+                <div class="ai-card reveal" style="--i: 0;">
+                    <div class="ai-card-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                    </div>
+                    <h3>Текст как зеркало</h3>
+                    <p>Мы смотрим не только на идеи автора, но и на то, какие реакции, защиты, согласия и споры они запускают в участниках.</p>
+                </div>
+                <div class="ai-card reveal" style="--i: 1;">
+                    <div class="ai-card-icon">
+                        <svg viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="12" y1="8" x2="12" y2="12"/>
+                            <line x1="12" y1="16" x2="12.01" y2="16"/>
+                        </svg>
+                    </div>
+                    <h3>Психологический угол</h3>
+                    <p>В фокусе не литературный контекст, а убеждения, жизненные паттерны, выборы, отношения и способы быть с собой и другими.</p>
+                </div>
+                <div class="ai-card reveal" style="--i: 2;">
+                    <div class="ai-card-icon">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <h3>Группа как поле</h3>
+                    <p>Один и тот же текст по-разному срабатывает в разных жизнях. Это дает сверку, объем и живую дискуссию.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== КАК ЭТО РАБОТАЕТ ====== -->
+    <section class="steps-section" id="steps">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="reveal">Как это работает</h2>
+            </div>
+            <div class="steps-grid">
+                <div class="step-item reveal">
+                    <div class="step-number">1</div>
+                    <h3>Получаешь книгу и тему</h3>
+                    <p>В начале месяца мы объявляем книгу и рамку, через которую будем ее читать.</p>
+                </div>
+                <div class="step-item reveal reveal-delay-1">
+                    <div class="step-number">2</div>
+                    <h3>Читаешь в течение месяца</h3>
+                    <p>Чтение обязательно: упражнение работает с конкретным текстом, а не с общим впечатлением.</p>
+                </div>
+                <div class="step-item reveal reveal-delay-2">
+                    <div class="step-number">3</div>
+                    <h3>Отвечаешь на провокации</h3>
+                    <p>Два раза в неделю Лена или Юлия присылают вопрос: проверить тезис, поспорить с автором, найти пример в жизни.</p>
+                </div>
+                <div class="step-item reveal reveal-delay-3">
+                    <div class="step-number">4</div>
+                    <h3>Приходишь на звонок</h3>
+                    <p>В конце месяца Лена и Юлия открывают разговор своими оптиками, а дальше книга становится материалом для живого обсуждения группы.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== КНИГА НОЯБРЯ ====== -->
+    <section class="example-section" id="example">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="reveal">Ноябрь · «Право на „лево“»</h2>
+            </div>
+            <p class="example-subtitle reveal">Эстер Перель предлагает смотреть на измену не только как на нарушение договора, но и как на кризис, который поднимает вопросы желания, тайны, близости и устройства современного брака.</p>
+            <div class="example-cards">
+                <div class="example-card reveal">
+                    <div class="example-book-header">
+                        <img src="assets/book-covers/ester-perel-pravo-na-levo-telegram.jpg" alt="Обложка книги Эстер Перель «Право на „лево“»" class="example-book-cover">
+                        <div class="example-book-title">Тема месяца: что измена обнаруживает в отношениях</div>
+                    </div>
+                    <div class="example-field">
+                        <div class="example-field-label">Вопросы месяца</div>
+                        <div class="example-field-value">
+                            1. Что именно мы называем верностью: действие, честность, договор или принадлежность?<br>
+                            2. Что измена разрушает сильнее — связь, доверие, образ себя или ощущение общей реальности?<br>
+                            3. Какие ожидания мы возлагаем на одного человека — и что происходит, когда он не может вместить их все?
+                        </div>
+                    </div>
+                    <div class="example-field">
+                        <div class="example-field-label">Практический фокус</div>
+                        <div class="example-field-value">Будем замечать собственные автоматические приговоры и пробовать удерживать сложность: последствия поступка, контекст отношений, желание, боль и разные версии одной истории.</div>
+                    </div>
+                    <div class="example-field">
+                        <div class="example-field-label">Вброс в чат</div>
+                        <div class="example-field-value prompt">Какая идея о верности кажется тебе очевидной — и что меняется, если поставить её под вопрос?</div>
+                    </div>
+                    <div class="example-field">
+                        <div class="example-field-value takeaway">Разговор об измене — это не только разговор о третьем человеке, но и о том, чего мы ждём от любви, брака и самих себя.</div>
+                    </div>
+                </div>
+                <div class="example-card reveal reveal-delay-2">
+                    <div class="example-book-header">
+                        <img src="Photos/ЛД2.jpg" alt="Лена Дегтярь" class="example-book-cover">
+                        <div class="example-book-title">Что происходит на звонке</div>
+                    </div>
+                    <div class="example-field">
+                        <div class="example-field-label">Первая часть</div>
+                        <div class="example-field-value">
+                            Лена и Юлия собирают свои независимые оптики: где согласны с книгой, где спорят и что видят по-разному.
+                        </div>
+                    </div>
+                    <div class="example-field">
+                        <div class="example-field-label">Вторая часть</div>
+                        <div class="example-field-value">Открытый разговор группы: цитаты, сопротивление, личные истории и вопросы, которые возникли по ходу чтения.</div>
+                    </div>
+                    <div class="example-field">
+                        <div class="example-field-label">Дата встречи</div>
+                        <div class="example-field-value prompt">Воскресенье, 29 ноября · 18:00–19:30 по Лондону</div>
+                    </div>
+                    <div class="example-field">
+                        <div class="example-field-value takeaway">Можно прийти не с готовым выводом, а с местом, где книга задела, разозлила или изменила вопрос.</div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== ЧТО ЧИТАЕМ ДАЛЬШЕ ====== -->
+    <section class="reading-list-section" id="books">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="reveal">Что читаем дальше</h2>
+                <p class="reading-list-intro reveal">Одна общая книга в месяц. План задаёт направление, а актуальная книга всегда отмечена отдельно.</p>
+            </div>
+            <ol class="reading-list">
+                <li class="reading-list-item is-current reveal reveal-delay-1">
+                    <div class="reading-cover-frame">
+                        <img class="reading-cover" src="assets/book-covers/ester-perel-pravo-na-levo-telegram.jpg" alt="Обложка книги Эстер Перель «Право на „лево“»" loading="lazy">
+                    </div>
+                    <div class="reading-copy">
+                        <span class="reading-month">Ноябрь</span>
+                        <span class="reading-title">«Право на „лево“. Почему люди изменяют и можно ли избежать измен»</span>
+                        <span class="reading-author">Эстер Перель</span>
+                        <span class="reading-note">Перель рассматривает измену не только как нарушение договора, но и как вход в разговор о желании, близости, тайне и современном браке. Без простого оправдания или осуждения — через реальные истории пар и их выборы.</span>
+                    </div>
+                </li>
+                <li class="reading-list-item reveal">
+                    <div class="reading-cover-frame">
+                        <img class="reading-cover" src="assets/book-covers/paul-kalanithi-when-breath-becomes-air.png" alt="Обложка книги Пола Каланити «Когда дыхание растворяется в воздухе»" loading="lazy">
+                    </div>
+                    <div class="reading-copy">
+                        <span class="reading-month">Декабрь</span>
+                        <span class="reading-title">«Когда дыхание растворяется в воздухе. Иногда судьбе все равно, что ты врач»</span>
+                        <span class="reading-author">Пол Каланити</span>
+                        <span class="reading-note">Мемуары нейрохирурга, который после диагноза «рак лёгких IV стадии» сам становится пациентом. О том, что делает жизнь осмысленной, когда будущее резко сужается, а медицина, работа, любовь и смерть меняются местами.</span>
+                    </div>
+                </li>
+                <li class="reading-list-item reveal reveal-delay-1">
+                    <div class="reading-cover-frame">
+                        <img class="reading-cover" src="assets/book-covers/pema-chodron-when-things-fall-apart.png" alt="Обложка книги Пемы Чодрон «Когда всё рушится»" loading="lazy">
+                    </div>
+                    <div class="reading-copy">
+                        <span class="reading-month">Январь</span>
+                        <span class="reading-title">«Когда всё рушится. Сердечный совет в трудные времена»</span>
+                        <span class="reading-author">Пема Чодрон</span>
+                        <span class="reading-note">О том, как оставаться рядом с собой, когда привычные опоры исчезают. Пема Чодрон предлагает не убегать от боли и неопределённости, а встречаться с ними через осознанность, сострадание и внимание к настоящему моменту.</span>
+                    </div>
+                </li>
+                <li class="reading-list-item reveal">
+                    <div class="reading-cover-frame">
+                        <img class="reading-cover" src="assets/book-covers/emily-nagoski-come-as-you-are.png" alt="Обложка книги Эмили Нагоски «Как хочет женщина»" loading="lazy">
+                    </div>
+                    <div class="reading-copy">
+                        <span class="reading-month">Февраль</span>
+                        <span class="reading-title">«Как хочет женщина. Мастер-класс по науке секса»</span>
+                        <span class="reading-author">Эмили Нагоски</span>
+                        <span class="reading-note">Научный разговор о женской сексуальности без единой «правильной» нормы. О том, как стресс, настроение, доверие, отношение к телу и общий контекст влияют на желание, возбуждение и удовольствие.</span>
+                    </div>
+                </li>
+                <li class="reading-list-item reveal reveal-delay-1">
+                    <div class="reading-cover-frame">
+                        <img class="reading-cover chanel-cover" src="assets/book-covers/claude-delay-chanel-solitaire.webp" alt="Обложка книги Клод Делэ «Одинокая Chanel»" loading="lazy">
+                    </div>
+                    <div class="reading-copy">
+                        <span class="reading-month">Март</span>
+                        <span class="reading-title">«Одинокая Chanel»</span>
+                        <span class="reading-author">Клод Делэ</span>
+                        <span class="reading-note">Интимный портрет Коко Шанель от Клод Делэ — её близкой подруги и психоаналитика в последние десять лет жизни. Не история модного дома, а история женщины: её страстей и потерь, блеска и уязвимости, творческой силы и одиночества.</span>
+                    </div>
+                </li>
+                <li class="reading-list-item reveal">
+                    <div class="reading-cover-frame">
+                        <img class="reading-cover" src="assets/book-covers/einat-nathan-smysl-moei-zhizni.png" alt="Обложка книги Эйнат Натан «Смысл моей жизни»" loading="lazy">
+                    </div>
+                    <div class="reading-copy">
+                        <span class="reading-month">Апрель</span>
+                        <span class="reading-title">«Смысл моей жизни. Каким родителем я хочу быть и каких детей хочу воспитать»</span>
+                        <span class="reading-author">Эйнат Натан</span>
+                        <span class="reading-note">Тёплый и честный разговор о родительстве без требования быть идеальными. О том, как видеть в ребёнке отдельного человека, выдерживать хаос и собственное несовершенство, слышать потребности детей и не исчезать из собственной жизни.</span>
+                    </div>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- ====== АРХИВ ПРОЧИТАННЫХ КНИГ ====== -->
+    <section class="archive-section" id="archive">
+        <div class="container">
+            <div class="archive-heading">
+                <div>
+                    <span class="archive-kicker reveal">След чтения</span>
+                    <h2 class="reveal">Прочитано в клубе</h2>
+                </div>
+                <p class="archive-intro reveal">Здесь не пересказы книг. Это короткая фиксация того, что появилось между текстом, опытом участниц и разговором группы.</p>
+            </div>
+
+            <div class="archive-grid">
+                <article class="archive-card reveal" data-number="01">
+                    <div class="archive-book">
+                        <img src="assets/book-covers/erich-fromm-art-of-loving.png" alt="Обложка книги Эриха Фромма «Искусство любить»" class="archive-cover" loading="lazy">
+                        <div>
+                            <span class="archive-month">Июнь 2026</span>
+                            <h3 class="archive-title">«Искусство любить»</h3>
+                            <p class="archive-author">Эрих Фромм</p>
+                        </div>
+                    </div>
+                    <p class="archive-label">Что родилось в разговоре</p>
+                    <p class="archive-summary">Мы начали с любви как чувства, а пришли к любви как практике внимания. Не к обещанию «всё время чувствовать правильно», а к способности снова и снова выбирать заботу, уважение и присутствие.</p>
+                    <ul class="archive-points">
+                        <li>Любовь к себе оказалась не эгоизмом, а основанием, с которого можно увидеть другого.</li>
+                        <li>Контакт начинается не в похожести, а в моменте, когда мы выдерживаем различие.</li>
+                        <li>Ответственность прозвучала как response-ability — возможность ответить, а не тяжёлая обязанность.</li>
+                    </ul>
+                    <p class="archive-takeaway">«Всё, что мы можем дать другому, — это качество нашего внимания».</p>
+                </article>
+
+                <article class="archive-card reveal reveal-delay-2" data-number="02">
+                    <div class="archive-book">
+                        <img src="assets/book-covers/lisa-marchiano-spark-of-life.jpg" alt="Обложка книги Лизы Марчиано «Искра жизни»" class="archive-cover" loading="lazy">
+                        <div>
+                            <span class="archive-month">Июль 2026</span>
+                            <h3 class="archive-title">«Искра жизни»</h3>
+                            <p class="archive-author">Лиза Марчиано</p>
+                        </div>
+                    </div>
+                    <p class="archive-label">Что родилось в разговоре</p>
+                    <p class="archive-summary">Разговор об архетипах стал разговором о свободе не застревать в одной роли. Не выбирать между удобной Евой и изгнанной Лилит, а возвращать себе весь спектр — прямоту, хитрость, гнев, нежность, слёзы и право ничего не делать.</p>
+                    <ul class="archive-points">
+                        <li>«Хорошая девочка» проявилась не как слабость, а как когда-то необходимый способ сохранить безопасность и контакт.</li>
+                        <li>Независимость стала суверенностью: я могу без тебя, но свободна выбирать быть с тобой.</li>
+                        <li>Даже пассивность может быть действием, если это осознанный выбор, а не автоматическое исчезновение.</li>
+                    </ul>
+                    <p class="archive-takeaway">Свобода — не стать Лилит вместо Евы, а получить доступ к обеим и выбирать по контексту.</p>
+                </article>
+
+                <article class="archive-card reveal" data-number="03">
+                    <div class="archive-book">
+                        <img src="assets/book-covers/edith-eger-choice.png" alt="Обложка книги Эдит Евы Эгер «Выбор»" class="archive-cover" loading="lazy">
+                        <div>
+                            <span class="archive-month">Август 2026</span>
+                            <h3 class="archive-title">«Выбор»</h3>
+                            <p class="archive-author">Эдит Ева Эгер</p>
+                        </div>
+                    </div>
+                    <p class="archive-label">С чем входили в разговор</p>
+                    <p class="archive-summary">В августе читали о свободе, которая начинается не с идеальных обстоятельств, а с возможности выбирать свой ответ на то, что уже произошло.</p>
+                    <ul class="archive-points">
+                        <li>Отделяли факты собственной истории от позиции, которую занимаем по отношению к ним.</li>
+                        <li>Замечали, где ожидание других обстоятельств превращается в откладывание жизни.</li>
+                        <li>Искали выбор, который действительно остаётся доступен даже внутри ограничений.</li>
+                    </ul>
+                    <p class="archive-takeaway">Выбор — не отрицание боли. Это возвращение себе места участницы собственной жизни.</p>
+                </article>
+
+                <article class="archive-card reveal reveal-delay-2" data-number="04">
+                    <div class="archive-book">
+                        <img src="assets/book-covers/irvin-yalom-staring-at-the-sun.png" alt="Обложка книги Ирвина Ялома «Вглядываясь в солнце»" class="archive-cover" loading="lazy">
+                        <div>
+                            <span class="archive-month">Сентябрь 2026</span>
+                            <h3 class="archive-title">«Вглядываясь в солнце»</h3>
+                            <p class="archive-author">Ирвин Ялом</p>
+                        </div>
+                    </div>
+                    <p class="archive-label">Что родилось в разговоре</p>
+                    <p class="archive-summary">Разговор о смерти оказался разговором о том, как мы распоряжаемся жизнью сейчас. Конечность может прояснять выбор, но может и превращать жизнь в проект, где всё обязано быть значимым.</p>
+                    <ul class="archive-points">
+                        <li>За страхом смерти иногда обнаруживается страх непрожитой жизни и спешка оставить после себя след.</li>
+                        <li>Вопрос «что, если остался год?» способен прояснить важное — или создать новое давление жить правильно.</li>
+                        <li>Стремление оставить наследие столкнулось с другой ценностью: не наследить, не переложить на других свой груз.</li>
+                    </ul>
+                    <p class="archive-takeaway">Что важнее: оставить след или не наследить?</p>
+                </article>
+
+                <article class="archive-card reveal" data-number="05">
+                    <div class="archive-book">
+                        <img src="assets/book-covers/lindsay-gibson-adult-children-telegram.jpg" alt="Обложка книги Линдси К. Гибсон «Взрослые дети эмоционально незрелых родителей»" class="archive-cover" loading="lazy">
+                        <div>
+                            <span class="archive-month">Октябрь 2026</span>
+                            <h3 class="archive-title">«Взрослые дети эмоционально незрелых родителей»</h3>
+                            <p class="archive-author">Линдси К. Гибсон</p>
+                        </div>
+                    </div>
+                    <p class="archive-label">Книга октября</p>
+                    <p class="archive-summary">Финальная встреча по книге перенесена на 1 ноября. Итоговая фиксация разговора появится здесь после встречи.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ornament -->
+    <div class="section-ornament">
+        <svg class="mandala-divider" viewBox="0 0 80 80" fill="none">
+            <circle cx="40" cy="40" r="36" stroke="#C4A265" stroke-width="0.5" opacity="0.4"/>
+            <circle cx="40" cy="40" r="24" stroke="#C4A265" stroke-width="0.5" opacity="0.3"/>
+            <circle cx="40" cy="40" r="12" stroke="#C4A265" stroke-width="0.5" opacity="0.2"/>
+            <circle cx="40" cy="40" r="3" fill="#C4A265" opacity="0.3"/>
+        </svg>
+    </div>
+
+    <!-- ====== ПРАВИЛА (мягко) ====== -->
+    <section class="rules-section" id="rules">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="reveal">Что это не</h2>
+            </div>
+            <p class="rules-intro reveal">Формат держится на чтении, участии и готовности работать с собой через текст.</p>
+            <ul class="rules-list">
+                <li class="reveal">Не литературный клуб: мы не разбираем приемы автора, эпоху и культурный контекст как главную цель</li>
+                <li class="reveal reveal-delay-1">Не подкаст: подкаст может быть побочным продуктом, но не заменяет закрытый звонок</li>
+                <li class="reveal reveal-delay-2">Не «приходи послушать»: чтение обязательно</li>
+                <li class="reveal reveal-delay-3">Не пассивное потребление: важны отклики, вопросы и участие в группе</li>
+                <li class="reveal reveal-delay-4">Не формат индивидуального списка: в месяц у группы одна общая книга</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Ornament -->
+    <div class="section-ornament">
+        <svg class="mandala-divider" viewBox="0 0 80 80" fill="none">
+            <circle cx="40" cy="40" r="36" stroke="#C4A265" stroke-width="0.5" opacity="0.3"/>
+            <circle cx="40" cy="40" r="24" stroke="#2A6B7C" stroke-width="0.5" opacity="0.2"/>
+            <circle cx="40" cy="40" r="12" stroke="#C4A265" stroke-width="0.5" opacity="0.15"/>
+            <circle cx="40" cy="40" r="3" fill="#2A6B7C" opacity="0.3"/>
+        </svg>
+    </div>
+
+    <!-- ====== СТОИМОСТЬ ====== -->
+    <section class="pricing-section" id="pricing">
+        <!-- Background mandala -->
+        <svg class="bg-mandala" viewBox="0 0 400 400" fill="none">
+            <circle cx="200" cy="200" r="195" stroke="white" stroke-width="0.3"/>
+            <circle cx="200" cy="200" r="160" stroke="white" stroke-width="0.3"/>
+            <circle cx="200" cy="200" r="120" stroke="white" stroke-width="0.3"/>
+            <circle cx="200" cy="200" r="80" stroke="white" stroke-width="0.3"/>
+            <polygon points="200,20 370,300 30,300" stroke="white" stroke-width="0.3"/>
+            <polygon points="200,380 30,100 370,100" stroke="white" stroke-width="0.3"/>
+        </svg>
+
+        <div class="container">
+            <div class="section-header">
+                <h2 class="reveal">Стоимость</h2>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card reveal" style="--i: 0;">
+                    <div class="pricing-label">1 месяц</div>
+                    <div class="pricing-amount">€9.99</div>
+                    <div class="pricing-note">в месяц</div>
+                </div>
+                <div class="pricing-card featured reveal" style="--i: 1;">
+                    <div class="pricing-label">6 месяцев</div>
+                    <div class="pricing-amount">€49.99</div>
+                    <div class="pricing-note">экономия €10</div>
+                </div>
+                <div class="pricing-card reveal" style="--i: 2;">
+                    <div class="pricing-label">12 месяцев</div>
+                    <div class="pricing-amount">€89.99</div>
+                    <div class="pricing-note">экономия €30</div>
+                </div>
+            </div>
+            <div class="pricing-cta reveal">
+                <a href="https://t.me/booktantra_bot" class="cta-button" target="_blank" rel="noopener">Присоединиться</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== FOOTER ====== -->
+    <footer>
+        <div class="container">
+            <svg class="lotus-divider" viewBox="0 0 120 40" fill="none" style="margin-bottom: 32px;">
+                <path d="M60 5 C50 5, 35 15, 30 25 C40 18, 55 15, 60 8 C65 15, 80 18, 90 25 C85 15, 70 5, 60 5Z" fill="none" stroke="#C4A265" stroke-width="0.8" opacity="0.4"/>
+                <path d="M60 8 C55 10, 42 20, 38 28 C48 22, 56 18, 60 12 C64 18, 72 22, 82 28 C78 20, 65 10, 60 8Z" fill="none" stroke="#2A6B7C" stroke-width="0.6" opacity="0.3"/>
+                <circle cx="60" cy="18" r="2.5" fill="#C4A265" opacity="0.35"/>
+            </svg>
+
+            <p class="footer-mantra">Трансформационное чтение — это когда книга не заканчивается на последней странице.<br>Она становится способом увидеть себя точнее.</p>
+            <p class="footer-brand">Трансформационное чтение с Леной Дегтярь и Юлией Ворониной</p>
+            <a href="https://t.me/lenadegtyarcourses" class="tg-questions-btn" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21.2 3.1 1.6 10.7c-.6.2-.6.7 0 .9l4.5 1.7 1.7 5.5c.2.5.7.5 1 .2l2.5-2.5 4.8 3.6c.6.4 1 .2 1.1-.5L20.9 4c.2-.8-.3-1.2-.9-.9z"/><line x1="8" y1="13.3" x2="16.5" y2="7.2"/></svg>
+                Задать вопрос в Telegram
+            </a>
+            <p class="footer-umbrella">Inscape Projects</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation dots
+        const sections = document.querySelectorAll('section');
+        const dots = document.querySelectorAll('.nav-dot');
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                document.getElementById(dot.dataset.section).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        const navObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    dots.forEach(d => d.classList.remove('active'));
+                    const active = document.querySelector(`[data-section="${entry.target.id}"]`);
+                    if (active) active.classList.add('active');
+                }
+            });
+        }, { threshold: 0.4 });
+
+        sections.forEach(s => navObserver.observe(s));
+
+        // Scroll reveal
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    </script>
+</body>
+</html>
